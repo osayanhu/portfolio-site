@@ -19,7 +19,7 @@
     <body>
 
     <section class="home-section active" id = 'home' >
-        <h1 class="hero-heading">Hello, I am <br> Osayanhu</h1>
+        <h1 class="hero-heading">Hello,<br> I am <br> Osayanhu</h1>
         <img src="static/images/home.jpg" class="home-img" alt="">
     </section>
 
@@ -60,8 +60,8 @@
                 <div class="project-content">
                     <h1 class="project-title">p53 model</h1>
                     <p class="project-info">
-                        Made a model that predicts the survival rate of a cancer of a patient based on the interactions between the genes affected by the p53 protein
-                    </p>
+                        Made a model that predicts the survival rate of a cancer patient based on the interactions between the genes affected by the p53 protein
+                    </p>345
                     <div class="project-btn-grp">
                         <a href = "https://github.com/osayanhu/p53-model" target="_blank"></a>
                         <button class="project-btn github">github repo</button>
@@ -148,6 +148,16 @@
             </div>
         </div>
     </div>
+
+     <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
 <footer class="footer">
         <ul class="social-icon">
         <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com/osayahnu.imoisili" target="_blank">
@@ -179,14 +189,12 @@
    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="static/sub.js"></script>
 
-        <!-- Subscribe Icon -->
-    <div id="subscribeIcon" class="subscribe-icon">
-        <img src="images/operator.png" alt="Subscribe">
-    </div>
-       <!-- Subscribe Form Modal -->
+
+    <!-- Subscribe Form Modal -->
     <div id="subscribeModal" class="modal">
         <div class="modal-content">
-                <div class="container">
+         <span class="close">&times;</span>
+        <div class="container">
         <div class="screen">
             <div class="screen-header">
                 <div class="screen-header-left">
@@ -203,8 +211,11 @@
             <div class="screen-body">
                 <div class="screen-body-item left">
                     <div class="app-title">
-                        <span>CONTACT</span>
-                        <span>US</span>
+                        <span>SUBSCRIBE</span>
+                        <span>TO</span>
+                        <span>MY</span>
+                        <span>MAILING</span>
+                        <span>LIST</span>
                     </div>
                 </div>
                 {% if success %}
