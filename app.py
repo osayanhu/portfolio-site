@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
+import os
 
 
-with open('mailchimp.txt') as file:
-    lines = [line.rstrip() for line in file]
 app = Flask(__name__)
 
-MAILCHIMP_API_KEY = lines[1]
-MAILCHIMP_LIST_ID = lines[0]
+MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
+MAILCHIMP_LIST_ID = '254358271b'
 MAILCHIMP_SERVER = 'us22'
 
 @app.route('/')
