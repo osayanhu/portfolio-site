@@ -1,28 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
     var modal = document.getElementById('subscribeModal');
-    var icon = document.getElementById('subscribeIcon');
     var span = document.querySelector('.close');
     var closeTimeout;
 
+    // Function to show the modal
     function showModal() {
         modal.style.display = 'block';
-
-        // Set a timeout to close the modal after 30 seconds if no interaction
         closeTimeout = setTimeout(function() {
             modal.style.display = 'none';
-        }, 60000);
+        }, 60000); // Close after 60 seconds
     }
 
+    // Function to reset the close timeout
     function resetCloseTimeout() {
         clearTimeout(closeTimeout);
         closeTimeout = setTimeout(function() {
             modal.style.display = 'none';
-        }, 30000);
+        }, 30000); // Reset to close after 30 seconds
     }
 
     // Show modal after 30 seconds
-    setTimeout(showModal, 10000); // 30,000 milliseconds = 30 seconds
-
+    if (!getCookie('subscribed')) {
+        setTimeout(showModal, 10000); // Show after 10 seconds
+    }
 
     span.onclick = function() {
         modal.style.display = 'none';
@@ -55,25 +55,48 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (response.redirected) {
+                // Set the subscribed cookie
+                setCookie('subscribed', 'true', 365);
                 window.location.href = response.url;
             }
         })
         .catch(error => console.error('Error:', error));
     }
 
-    // Reset the close timeout on any interaction within the modal
     modal.onmousemove = resetCloseTimeout;
     modal.onkeypress = resetCloseTimeout;
 
-    // Show modal when delete key is pressed
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Delete') {
             showModal();
         }
     });
 
-    // Show modal when back button is pressed
     window.addEventListener('popstate', function(event) {
         showModal();
     });
+
+    // Function to set a cookie
+    function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Function to get a cookie by name
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1, c.length);
+            }
+            if (c.indexOf(nameEQ) == 0) {
+                return c.substring(nameEQ.length, c.length);
+            }
+        }
+        return null;
+    }
 });
