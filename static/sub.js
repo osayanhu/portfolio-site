@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         else{
         modal.style.display = 'none'
         }
+       }
 
     // Function to reset the close timeout
     function resetCloseTimeout() {
@@ -101,4 +102,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return null;
     }
-})
+});
