@@ -20,7 +20,7 @@ def courses():
     return render_template('courses.html')
 
 
-@app.route('/subscribe', methods=['POST'])
+@app.route('/', methods=['POST'])
 def subscribe():
     name = request.form.get('name')
     email = request.form.get('email')
