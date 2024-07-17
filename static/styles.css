@@ -419,7 +419,7 @@ main {
 .card:nth-child(odd):before {
     content: '';
     position: absolute;
-    right: -13%;
+    right: -15%;
     top: 50%;
     transform: translateY(-50%);
     width: 20px;
