@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to show the modal
     function showModal() {
-        if (getCookie('subscribed') != "") {
+        if (getCookie('subscribed') == "") {
         modal.style.display = 'block';
         closeTimeout = setTimeout(function() {
             modal.style.display = 'none';
