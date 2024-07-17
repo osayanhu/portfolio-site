@@ -5,11 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to show the modal
     function showModal() {
+        if (getCookie('subscribed') != "") {
         modal.style.display = 'block';
         closeTimeout = setTimeout(function() {
             modal.style.display = 'none';
         }, 60000); // Close after 60 seconds
     }
+        else{
+        modal.style.display = 'none'
+        }
 
     // Function to reset the close timeout
     function resetCloseTimeout() {
@@ -19,10 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 30000); // Reset to close after 30 seconds
     }
 
-    // Show modal after 30 seconds
-    if (getCookie('subscribed') != "") {
-        setTimeout(showModal, 10000); // Show after 10 seconds
-    }
+    setTimeout(showModal, 10000); // Show after 10 seconds
+
 
     span.onclick = function() {
         modal.style.display = 'none';

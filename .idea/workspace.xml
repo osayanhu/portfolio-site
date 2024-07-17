@@ -210,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721221772891</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Site ready for Vercel deployment">
+      <option name="closed" value="true" />
+      <created>1721222489371</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1721222489371</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
