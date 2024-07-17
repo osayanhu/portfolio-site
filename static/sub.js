@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show modal after 30 seconds
-    if (!getCookie('subscribed')) {
+    if (getCookie('subscribed') != "") {
         setTimeout(showModal, 10000); // Show after 10 seconds
     }
 
