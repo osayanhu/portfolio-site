@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show modal after 30 seconds
-    setTimeout(showModal, 15000); // 30,000 milliseconds = 30 seconds
+    setTimeout(showModal, 10000); // 30,000 milliseconds = 30 seconds
 
 
     span.onclick = function() {
