@@ -49,10 +49,9 @@ nav {
 
 .nav-items {
     position: fixed; /* Fix position for sliding effect */
-    top: 20px;
+    top: 70px;
     right: -250px; /* Start off-screen */
     width: 250px; /* Adjust width as needed */
-    height: 100%;
     background: #0000aa;
     flex-direction: column;
     display: flex; /* Always display flex for layout */
@@ -610,14 +609,19 @@ main {
 
 @media screen and (max-width: 900px) {
   .nav-items {
-    position: static;
-    width: 100%;
-    background: none;
-    flex-direction: row;
-    display: none;
+    position: fixed;
+    top: 70pxpx;
+    right: -250px;
+    width: 250px;
+    height: 10%;
+    background: #0000aa;
+    flex-direction: column;
+    display: flex;
+    transition: right 0.3s ease;x;
   }
 
   .nav-items.active {
+    right:0;
     display: flex;
   }
 
