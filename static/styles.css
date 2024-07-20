@@ -768,6 +768,23 @@ main {
     z-index: -1;
 }
 
+@media screen and  (max-width: 480px) {
+
+    .nav-items{
+        height: 15%;
+    }
+    .social-icon, .menu {
+        flex-wrap: nowrap;
+}
+
+.courses-section {
+   display: block;
+}
+
+.course {
+    width:100%
+}
+}
 @media screen and  (min-width : 769px) and (max-width: 1024px) {
 
     .hero-heading{
