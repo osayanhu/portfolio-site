@@ -688,11 +688,6 @@ main {
   font-weight: 300;
 }
 
-.footer ul {
-    height: 0vh;
-    top: 80px; 
-    left: -100%;
-}
 
 
 .courses-section {
@@ -965,6 +960,13 @@ main {
     .card-body {
         background-color: transparent;
     }
+
+    .footer ul {
+        height: 0vh;
+        top: 80px;
+        left: -100%;
+    }
+
 
 @media screen and  (max-width: 480px) {
 
