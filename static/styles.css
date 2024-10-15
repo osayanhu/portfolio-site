@@ -870,6 +870,96 @@ main {
     margin-bottom: 50px;
   }
 
+    .card {
+        width: 45%;
+        padding: 30px;
+        border-radius: 10px;
+        color: #fff;
+        display: block;
+        position: relative;
+        background: #ff0077;
+    }
+
+        .card:nth-child(even) {
+            margin-left: auto;
+        }
+
+            .card:nth-child(even):before {
+                content: '';
+                position: absolute;
+                left: -15%;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 20px;
+                height: 20px;
+                border: 5px solid #ff0077;
+                border-radius: 50%;
+            }
+
+            .card:nth-child(even):after {
+                content: '';
+                position: absolute;
+                left: -8.5%;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 7%;
+                height: 2px;
+                background: #fff;
+            }
+
+        .card:nth-child(odd):before {
+            content: '';
+            position: absolute;
+            right: -15%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 5px solid #ff0077;
+            border-radius: 50%;
+        }
+
+        .card:nth-child(odd):after {
+            content: '';
+            position: absolute;
+            right: -8.5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 7%;
+            height: 2px;
+            background: #fff;
+        }
+
+    .card-title {
+        text-transform: capitalize;
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+        background-color: transparent;
+        S
+    }
+
+    .card-subtitle {
+        font-size: 25px;
+        font-weight: 300;
+        margin-bottom: 20px;
+    }
+
+    .card-detail {
+        text-align: center;
+        background-color: transparent;
+    }
+
+
+    .card-info {
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 30px;
+    }
+
+    .card-body {
+        background-color: transparent;
+    }
 
 @media screen and  (max-width: 480px) {
 
