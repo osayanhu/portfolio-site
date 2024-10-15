@@ -369,7 +369,7 @@ main {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
-    background-color: #cd7272;
+    background-color: #ff0077;
     color: white;
     border: none;
     border-radius: 5px;
@@ -645,7 +645,6 @@ main {
 .footer {
   position: relative;
   width: 100%;
-  background: #545454;
   min-height: 100px;
   padding: 20px 20px;
   display: flex;
