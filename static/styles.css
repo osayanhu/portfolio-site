@@ -156,6 +156,7 @@ main {
 
 .hero-content {
     width: 600px;
+    margin-top: 10em;
 }
 
     .hero-content h1 {
@@ -189,6 +190,7 @@ main {
     .btn-box a {
         position: relative;
         display: inline-flex;
+        margin-left: 20px;
         justify-content: center;
         align-items: center;
         width: 150px;
