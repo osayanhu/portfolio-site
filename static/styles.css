@@ -301,21 +301,17 @@ main {
 .project-section {
     width: 100%;
     min-height: 100vh;
-    padding: 150px 100px 100px;
+    padding: 20em 100px 100px;
     position: relative;
     top: 0;
 }
 
 .project-heading {
-    font-size: 100px;
-    background: #252525;
+    font-size: 50px;
     text-transform: capitalize;
     text-align: center;
     margin-bottom: 50px;
-    color: #000000;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-stroke: 8px transparent;
+    color: #ff0077;
 }
 
 .project-container {
@@ -364,25 +360,21 @@ main {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
 }
+    .project-btn-grp a {
+        text-decoration: none;
+        list-style: none;
+        color: white;
+        font-size: 17px;
+        padding: 7px 13px;
+        border-radius: 3px;
+        text-transform: uppercase;
+    }
 
-.project-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #ff0077;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.3s;
-}
+        .project-btn-grp a:hover, a.active {
+            background: #ff0077;
+            transition: .5s;
+        }
 
-.project-btn.live {
-    background: none;
-    border: 2px solid #fff;
-}
 
 .project-card:hover .project-img {
     filter: blur(20px);
