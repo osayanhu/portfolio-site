@@ -604,6 +604,10 @@ main {
     margin-bottom: 20px;
 }
 
+.card-detail{
+    text-align:center
+}
+
 .card-info {
     font-size: 18px;
     font-weight: 300;
