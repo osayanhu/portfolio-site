@@ -870,65 +870,6 @@ main {
     margin-bottom: 50px;
   }
 
-  .card {
-    width: 45%;
-    margin: 100px 0;
-    display:flex;
-  }
-
-  .card-title {
-    text-transform: capitalize;
-    font-size: 100%;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .card-detail{
-    font-size:100%;
-  }
-
-  .card:nth-child(even):before {
-    content: '';
-    position: absolute;
-    left: -65%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 5px solid #191919;
-    border-radius: 50%;
-}
-
-  .card:nth-child(even):after {
-    content: '';
-    position: absolute;
-    left: -55%;
-    transform: translateY(-50%);
-    width: 50%;
-    height: 2px;
-    background: #fff;
-    z-index: -1;
-}
-   .card:nth-child(odd):before {
-    content: '';
-    position: absolute;
-    right: -65%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    border: 5px solid #191919;
-    border-radius: 50%;
-}
-
-  .card:nth-child(odd):after {
-    content: '';
-    position: absolute;
-    right: -55%;
-    transform: translateY(-50%);
-    width: 50%;
-    height: 2px;
-    background: #fff;
-    z-index: -1;
-}
 
 @media screen and  (max-width: 480px) {
 
