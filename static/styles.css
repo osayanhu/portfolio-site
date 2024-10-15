@@ -59,13 +59,14 @@ nav ul {
             color: white;
             font-size: 17px;
             padding: 7px 13px;
-            border-radius: 50%;
+            background-color:#ff0077;
             text-transform: uppercase;
         }
 
 a.active, a:hover {
     background: #ff0077;
     transition: .5s;
+    border-radius: 50%;
 }
 
 .checkbtn {
