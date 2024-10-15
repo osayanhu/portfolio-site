@@ -538,6 +538,7 @@ main {
     margin: -40px 0;
     position: relative;
     background: #f00;
+    background-color: #ff0077;
 }
 
 .card:nth-child(even) {
@@ -565,7 +566,6 @@ main {
     width: 7%;
     height: 2px;
     background: #fff;
-    z-index: -1;
 }
 
 .card:nth-child(odd):before {
@@ -589,15 +589,6 @@ main {
     width: 7%;
     height: 2px;
     background: #fff;
-    z-index: -1;
-}
-
-.card:nth-child(even) {
-    background: #aa00ff;
-}
-
-.card:nth-child(odd) {
-    background: #0000aa;
 }
 
 .card-title {
