@@ -848,7 +848,7 @@ main {
   font-size:15px;
   }
   
-  .download-cv-btn:hover {
+  .download-cv-btn:hover, .download-cv-btn:active {
         background: #ff0077;
     }
   .skill-section {
