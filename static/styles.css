@@ -96,9 +96,6 @@ a.active, a:hover {
     nav ul li a {
         font-size: 20px;
     }
-    .btn-box a {
-        margin-left: 0;
-    }
 }
 
 @media screen and (max-width: 858px) {
@@ -138,9 +135,6 @@ a.active, a:hover {
         left: 0;
         background: #000;
         opacity: 0.5;
-    }
-    .btn-box a{
-        margin-left:0;
     }
 }
 
@@ -203,7 +197,6 @@ main {
     .btn-box a {
         position: relative;
         display: inline-flex;
-        margin-left: 20px;
         justify-content: center;
         align-items: center;
         width: 150px;
