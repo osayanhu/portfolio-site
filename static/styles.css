@@ -43,12 +43,14 @@ label.logo {
 
 nav ul {
     float: right;
+    background: transparent;
 }
 
     nav ul li {
         display: inline-block;
         line-height: 80px;
         margin: 5px;
+        background: transparent;
     }
 
         nav ul li a {
@@ -57,7 +59,7 @@ nav ul {
             color: white;
             font-size: 17px;
             padding: 7px 13px;
-            border-radius: 3px;
+            border-radius: 50%;
             text-transform: uppercase;
         }
 
@@ -419,12 +421,12 @@ main {
     text-transform: capitalize;
     cursor: pointer;
     transition: .5s;
-    background: rgba(0, 0, 0, 0.5);
+    background:#000;
 }
 
-.download-cv-btn:hover {
-    background: #000;
-}
+    .download-cv-btn:hover {
+        background: #ff0077;
+    }
 
 /* Skills section */
 .skill-section {
