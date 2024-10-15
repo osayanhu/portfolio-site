@@ -102,7 +102,7 @@ a.active, a:hover {
     .checkbtn {
         display: block;
         font-size: 26px;
-        margin-top: 5px;
+        margin-top: 1.1em;
     }
 
     ul {
@@ -133,8 +133,14 @@ a.active, a:hover {
 
     #check:checked ~ ul {
         left: 0;
+        background: #000;
+        opacity: 0.5;
+    }
+    .btn-box a{
+        margin-left:0;
     }
 }
+
 
 form {
     display: flex;
@@ -841,7 +847,10 @@ main {
   .about-info {
   font-size:15px;
   }
-
+  
+  .download-cv-btn:hover {
+        background: #ff0077;
+    }
   .skill-section {
     margin: 50px 0;
   }
