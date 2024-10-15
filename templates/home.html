@@ -1,200 +1,221 @@
 <html>
-    <head>
+<head>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="static/styles.css">
-        <title>Osayanhu Imoisili</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/styles.css">
+    <title>Osayanhu Imoisili</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Social Icon Link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    </head>
+</head>
+<body>
+    <header class="header-sec">
+        <!-- navbar -->
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fa fa-bars"></i>
+            </label>
+            <label class="logo">OSA<span>YANHU</span></label>
+            <ul>
+                <li><a class="active" href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- navbar -->
-    <nav>
-    <div class="menu-logo">
-        <a href="/">
-            <img src="static/images/logo.png" alt="Menu Logo" style="width: 60px; height: 60px;">
-        </a>
-    </div>
-    <div class="menu-icon" id="menuIcon">&#9776;</div>
-    <div class="nav-items" id="navItems">
-        <ul class="overview">
-            <li><a href="/">Home</a></li>
-            <li><a href="/courses">Courses</a></li>
-        </ul>
-    </div>
-</nav>
+        <section class="home-section" id='home'>
+            <h1 class="hero-heading">Hello,<br> I am <br> Osayanhu</h1>
+            <img src="static/images/home.jpg" class="home-img" alt="">
+        </section>
 
-    <body>
+        <!-- project section -->
+        <section class="project-section active" id='projects'>
+            <h1 class="project-heading">some of my projects</h1>
+            <div class="project-container">
+                <div class="project-card">
+                    <img src="static/images/aipo.png" class="project-img" alt="">
+                    <div class="project-content">
+                        <h1 class="project-title">AI Programming Nanodegree from Udacity</h1>
+                        <p class="project-info">
+                            Completed AI Programming Nanodegree, mastering Python, NumPy, and TensorFlow to build and train neural networks for machine learning applications.
+                        </p>
+                        <div class="project-btn-grp">
+                            <a href="https://github.com/osayanhu/AI-Programming-with-Python-Nanodegree" target="_blank">
+                                <button class="project-btn github">github repo</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-    <section class="home-section" id = 'home' >
-        <h1 class="hero-heading">Hello,<br> I am <br> Osayanhu</h1>
-        <img src="static/images/home.jpg" class="home-img" alt="">
-    </section>
+                <div class="project-card">
+                    <img src="static/images/efiling.png" class="project-img" alt="">
+                    <div class="project-content">
+                        <h1 class="project-title">E-filing Web Application</h1>
+                        <p class="project-info">
+                            Developed an efficient e-filing web application streamlining document management and submission processes, enhancing user experience and administrative efficiency.
+                        </p>
+                        <div class="project-btn-grp">
+                            <a href="https://github.com/osayanhu/e-filing" target="_blank">
+                                <button class="project-btn github">github repo</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- project section -->
-    <section class="project-section active" id = 'projects'>
-        <h1 class="project-heading">some of my projects</h1>
-        <div class="project-container">
-            <div class="project-card">
-                <img src="static/images/aipo.png" class="project-img" alt="">
-                <div class="project-content">
-                    <h1 class="project-title">AI Programming Nanodegree from Udacity</h1>
-                    <p class="project-info">
-                        Completed AI Programming Nanodegree, mastering Python, NumPy, and TensorFlow to build and train neural networks for machine learning applications.
-                    </p>
-                    <div class="project-btn-grp">
-                        <a href = "https://github.com/osayanhu/AI-Programming-with-Python-Nanodegree" target="_blank">
-                            <button class="project-btn github">github repo</button></a>
+                <div class="project-card">
+                    <img src="static/images/nnsurv.png" class="project-img" alt="">
+                    <div class="project-content">
+                        <h1 class="project-title">p53 model</h1>
+                        <p class="project-info">
+                            Made a model that predicts the survival rate of a cancer patient based on the interactions between the genes affected by the p53 protein
+                        </p>
+                        <div class="project-btn-grp">
+                            <a href="https://github.com/osayanhu/p53-model" target="_blank">
+                                <button class="project-btn github">github repo</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="project-card">
-                <img src="static/images/efiling.png" class="project-img" alt="">
-                <div class="project-content">
-                    <h1 class="project-title">E-filing Web Application</h1>
-                    <p class="project-info">
-                        Developed an efficient e-filing web application streamlining document management and submission processes, enhancing user experience and administrative efficiency.
-                    </p>
-                    <div class="project-btn-grp">
-                        <a href = "https://github.com/osayanhu/e-filing" target="_blank">
-                            <button class="project-btn github">github repo</button></a>
-                    </div>
+        <!-- about section -->
+        <section class="about-section active" id='about'>
+            <div class="about">
+                <div class="about-img-container">
+                    <img src="static/images/home.jpg" class="about-img" alt="">
+                    <a href="https://drive.google.com/u/0/uc?id=1a3O2BDBLM4Ylh47PaNhnDqwJBGfLePwD&export=download" download="Osayahu Imoisili CV" target="_blank" rel="noopener noreferrer">
+                        <button class="download-cv-btn">Download CV</button>
+                    </a>
                 </div>
-            </div>
-
-            <div class="project-card">
-                <img src="static/images/nnsurv.png" class="project-img" alt="">
-                <div class="project-content">
-                    <h1 class="project-title">p53 model</h1>
-                    <p class="project-info">
-                        Made a model that predicts the survival rate of a cancer patient based on the interactions between the genes affected by the p53 protein
-                    </p>
-                    <div class="project-btn-grp">
-                        <a href = "https://github.com/osayanhu/p53-model" target="_blank">
-                            <button class="project-btn github">github repo</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- about section -->
-    <section class="about-section active" id = 'about'>
-        <div class="about">
-            <div class="about-img-container">
-                <img src="static/images/home.jpg" class="about-img" alt="">
-                <a href="https://drive.google.com/u/0/uc?id=1a3O2BDBLM4Ylh47PaNhnDqwJBGfLePwD&export=download" download="Osayahu Imoisili CV" target="_blank" rel="noopener noreferrer">
-                <button class="download-cv-btn">Download CV</button>
-                </a>
-            </div>
-            <p class="about-info">Osayanhu Imoisili is a distinguished graduate of Mathematics and Computer Science from Covenant University. With a robust foundation in data science, machine learning and web development, Osayanhu has cultivated a versatile skill set through a combination of formal education and targeted professional training. He has honed his expertise through rigorous coursework on platforms such as Udacity, where he learned the use of AWS in machine learning, and Coursera, where he delved into text mining, data visualisations and social media mining.
-        <br> Osayanhu's technical proficiency is further evidenced by his successful completion of various Hackerrank examinations, achieving commendable results in SQL, software engineering, and Python. His diverse training and qualifications underscore his ability to navigate complex technical challenges and deliver innovative solutions. With a commitment to continuous learning and professional development, Osayanhu remains at the forefront of technological advancements, poised to contribute significantly to any data-driven or software engineering endeavour.</p>
-        </div>
-    </section>
-
-    <!-- skills -->
-    <section class="skill-section" id = 'skills'>
-        <h1 class="heading">skills</h1>
-        <div class="skills-container">
-            <div class="skill-card">
-                <img src="static/images/html.png" class="skill-img" alt="">
-                <div class="skill-level">75%</div>
-                <h1 class="skill-name">HTML</h1>
-                <p class="skill-info">Proficient in crafting clean, semantic HTML for building responsive, user-friendly websites. Skilled in creating structured web content and optimising HTML for SEO. Expertise in integrating HTML with CSS and JavaScript for dynamic web applications.</p>
-            </div>
-
-            <div class="skill-card">
-                <img src="static/images/dtas.png" class="skill-img" alt="">
-                <div class="skill-level">90%</div>
-                <h1 class="skill-name">Data Science</h1>
-                <p class="skill-info">Expert in leveraging data science to uncover actionable insights and drive data-driven decision-making. Proficient in statistical analysis, data visualisation, and predictive modelling. Transform complex data into strategic assets.</p>
-            </div>
-
-            <div class="skill-card">
-                <img src="static/images/python.png" class="skill-img" alt="">
-                <div class="skill-level">80%</div>
-                <h1 class="skill-name">Python</h1>
-                <p class="skill-info">Skilled in Python programming for developing robust, efficient solutions. Extensive experience in scripting, automation, and data manipulation. Utilise Python libraries such as Pandas, NumPy, and Matplotlib for comprehensive data analysis.</p>
-            </div>
-
-            <div class="skill-card">
-                <img src="static/images/ml.png" class="skill-img" alt="">
-                <div class="skill-level">85%</div>
-                <h1 class="skill-name">Machine Learning</h1>
-                <p class="skill-info">Specialised in designing and implementing machine learning models. Proficient in supervised and unsupervised learning techniques. Expertise in using TensorFlow, Scikit-learn, and Keras for advanced predictive analytics and AI solutions.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- timeline -->
-    <div class="timeline">
-        <h1 class="heading">education and experience</h1>>
-
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">2017-2022</h1>
-                <p class="card-detail">B.Sc. Industrial Mathematics and Computer Science</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">2022 - 2023</h1>
-                <p class="card-detail">Software Engineer</p>
-                <p class="card-detail">Investments and Securities Tribunal
-
-
+                <p class="about-info">
+                    Osayanhu Imoisili is a distinguished graduate of Mathematics and Computer Science from Covenant University. With a robust foundation in data science, machine learning and web development, Osayanhu has cultivated a versatile skill set through a combination of formal education and targeted professional training. He has honed his expertise through rigorous coursework on platforms such as Udacity, where he learned the use of AWS in machine learning, and Coursera, where he delved into text mining, data visualisations and social media mining.
+                    <br> Osayanhu's technical proficiency is further evidenced by his successful completion of various Hackerrank examinations, achieving commendable results in SQL, software engineering, and Python. His diverse training and qualifications underscore his ability to navigate complex technical challenges and deliver innovative solutions. With a commitment to continuous learning and professional development, Osayanhu remains at the forefront of technological advancements, poised to contribute significantly to any data-driven or software engineering endeavour.
                 </p>
             </div>
-        </div>
+        </section>
 
-        <div class="card">
-            <div class="card-body">
-                <h1 class="card-title">2020 - 2024</h1>
-                <p class="card-detail">Freelance Data Scientist </p>
+        <!-- skills -->
+        <section class="skill-section" id='skills'>
+            <h1 class="heading">skills</h1>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <img src="static/images/html.png" class="skill-img" alt="">
+                    <div class="skill-level">75%</div>
+                    <h1 class="skill-name">HTML</h1>
+                    <p class="skill-info">Proficient in crafting clean, semantic HTML for building responsive, user-friendly websites. Skilled in creating structured web content and optimising HTML for SEO. Expertise in integrating HTML with CSS and JavaScript for dynamic web applications.</p>
+                </div>
+
+                <div class="skill-card">
+                    <img src="static/images/dtas.png" class="skill-img" alt="">
+                    <div class="skill-level">90%</div>
+                    <h1 class="skill-name">Data Science</h1>
+                    <p class="skill-info">Expert in leveraging data science to uncover actionable insights and drive data-driven decision-making. Proficient in statistical analysis, data visualisation, and predictive modelling. Transform complex data into strategic assets.</p>
+                </div>
+
+                <div class="skill-card">
+                    <img src="static/images/python.png" class="skill-img" alt="">
+                    <div class="skill-level">80%</div>
+                    <h1 class="skill-name">Python</h1>
+                    <p class="skill-info">Skilled in Python programming for developing robust, efficient solutions. Extensive experience in scripting, automation, and data manipulation. Utilise Python libraries such as Pandas, NumPy, and Matplotlib for comprehensive data analysis.</p>
+                </div>
+
+                <div class="skill-card">
+                    <img src="static/images/ml.png" class="skill-img" alt="">
+                    <div class="skill-level">85%</div>
+                    <h1 class="skill-name">Machine Learning</h1>
+                    <p class="skill-info">Specialised in designing and implementing machine learning models. Proficient in supervised and unsupervised learning techniques. Expertise in using TensorFlow, Scikit-learn, and Keras for advanced predictive analytics and AI solutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- timeline -->
+        <div class="timeline">
+            <h1 class="heading">education and experience</h1>>
+
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">2017-2022</h1>
+                    <p class="card-detail">B.Sc. Industrial Mathematics and Computer Science</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">2022 - 2023</h1>
+                    <p class="card-detail">Software Engineer</p>
+                    <p class="card-detail">
+                        Investments and Securities Tribunal
+
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">2020 - 2024</h1>
+                    <p class="card-detail">Freelance Data Scientist </p>
+                </div>
             </div>
         </div>
-    </div>
 
-     <!-- Flash Messages -->
+        <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            <ul class="flashes">
+        {% if messages %}
+        <ul class="flashes">
             {% for category, message in messages %}
-              <li class="{{ category }}">{{ message }}</li>{% endfor %}
-            </ul>
-          {% endif %}
+            <li class="{{ category }}">{{ message }}</li>{% endfor %}
+        </ul>
+        {% endif %}
         {% endwith %}
-<footer class="footer">
-        <ul class="social-icon">
-        <li class="social-icon__item"><a class="social-icon__link" href="https://www.facebook.com/osayahnu.imoisili" target="_blank">
-            <ion-icon name="logo-facebook"></ion-icon>
-        </a></li>
-        <li class="social-icon__item"><a class="social-icon__link" href="https://www.x.com/osayanhu" target="_blank">
-            <ion-icon name="logo-X"></ion-icon>
-        </a></li>
-        <li class="social-icon__item"><a class="social-icon__link" href="https://www.linkedin.com/in/osayanhuimoisili" target="_blank">
-            <ion-icon name="logo-linkedin"></ion-icon>
-        </a></li>
-        <li class="social-icon__item"><a class="social-icon__link" href="https://www.instagram.com/osayanhu" target="_blank">
-            <ion-icon name="logo-instagram"></ion-icon>
-        </a></li>
-        <li class="social-icon__item"><a class="social-icon__link" href="https://wa.me/2348105154556/?text=Hello!" target="_blank">
-            <ion-icon name="logo-whatsapp"></ion-icon>
-        </a></li>
-        <li class="social-icon__item"><a class="social-icon__link" href="mailto:jerryosaimo@gmail.com" target="_blank">
-            <ion-icon name="logo-google"></ion-icon>
-        </a></li>
-    </ul>
-    <ul class="menu">
-        <li class="menu__item"><a class="menu__link" href="/">Home</a></li>
-        <li class="menu__item"><a class="menu__link" href="/courses">Courses</a></li>
-    </ul>
-    <p>&copy;2024 Osayanhu Imoisili</p>
-</footer>
-    <script src = 'static/menu.js'></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
-   <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
-    </body>
+        <footer class="footer">
+            <ul class="social-icon">
+                <li class="social-icon__item">
+                    <a class="social-icon__link" href="https://www.facebook.com/osayahnu.imoisili" target="_blank">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link" href="https://www.x.com/osayanhu" target="_blank">
+                        <ion-icon name="logo-X"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link" href="https://www.linkedin.com/in/osayanhuimoisili" target="_blank">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link" href="https://www.instagram.com/osayanhu" target="_blank">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link" href="https://wa.me/2348105154556/?text=Hello!" target="_blank">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </a>
+                </li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link" href="mailto:jerryosaimo@gmail.com" target="_blank">
+                        <ion-icon name="logo-google"></ion-icon>
+                    </a>
+                </li>
+            </ul>
+            <ul class="menu">
+                <li class="menu__item"><a class="menu__link" href="/">Home</a></li>
+                <li class="menu__item"><a class="menu__link" href="/courses">Courses</a></li>
+            </ul>
+            <p>&copy;2024 Osayanhu Imoisili</p>
+        </footer>
+        <script src='static/menu.js'></script>
+        <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+</body>
 </html>
