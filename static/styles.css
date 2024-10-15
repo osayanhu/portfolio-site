@@ -688,8 +688,10 @@ main {
   font-weight: 300;
 }
 
-.footer ul{
-    height:0vh;
+.footer ul {
+    height: 0vh;
+    top: 80px; 
+    left: -100%;
 }
 
 
