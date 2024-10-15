@@ -147,7 +147,6 @@ main {
     background-repeat: no-repeat;
     background-size: cover;
     background-blend-mode: color;
-    height: 100vh;
     display: flex;
     align-items: center;
     padding: 0 80px;
