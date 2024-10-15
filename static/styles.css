@@ -96,6 +96,9 @@ a.active, a:hover {
     nav ul li a {
         font-size: 20px;
     }
+    .btn-box a {
+        margin-left: 0;
+    }
 }
 
 @media screen and (max-width: 858px) {
