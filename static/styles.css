@@ -302,6 +302,9 @@ main {
         .hero h1 {
             padding: 60px 0 0 0;
         }
+    .btn-box a {
+        margin-right:3em;
+    }
 }
 
 /* Project section */
@@ -685,6 +688,10 @@ main {
   font-weight: 300;
 }
 
+.footer ul{
+    height:0vh;
+}
+
 
 .courses-section {
     display:grid;
@@ -962,9 +969,7 @@ main {
     .nav-items{
         height: 15%;
     }
-    .social-icon, .menu {
-        flex-wrap: nowrap;
-}
+ 
 
 .courses-section {
    display: block;
