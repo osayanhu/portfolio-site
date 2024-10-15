@@ -535,10 +535,8 @@ main {
     border-radius: 10px;
     color: #fff;
     display: block;
-    margin: -40px 0;
     position: relative;
-    background: #f00;
-    background-color: #ff0077;
+    background: #ff0077;
 }
 
 .card:nth-child(even) {
