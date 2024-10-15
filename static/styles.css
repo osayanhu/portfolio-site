@@ -142,8 +142,7 @@ main {
 
 /* Home section */
 .hero {
-    background-color: #0000004c;
-    background-image: url(images/home.png);
+    background-color: #000000;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
