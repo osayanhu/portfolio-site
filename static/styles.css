@@ -356,9 +356,7 @@ main {
 }
 
 .project-btn-grp {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    display: flex;
 }
     .project-btn-grp a {
         text-decoration: none;
@@ -368,21 +366,9 @@ main {
         padding: 7px 13px;
         border-radius: 3px;
         text-transform: uppercase;
+        background: #ff0077
     }
 
-        .project-btn-grp a:hover, a.active {
-            background: #ff0077;
-            transition: .5s;
-        }
-
-
-.project-card:hover .project-img {
-    filter: blur(20px);
-}
-
-.project-card:hover .project-content {
-    opacity: 1;
-}
 
 /* About section */
 .about-section {
