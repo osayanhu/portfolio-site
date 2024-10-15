@@ -767,108 +767,111 @@ main {
 }
 
 @media screen and (max-width: 900px) {
-  .nav-items {
-    position: fixed;
-    top: 70pxpx;
-    right: -250px;
-    width: 250px;
-    height: 10%;
-    background: #0000aa;
-    flex-direction: column;
-    display: flex;
-    transition: right 0.3s ease;x;
-  }
+    .nav-items {
+        position: fixed;
+        top: 70pxpx;
+        right: -250px;
+        width: 250px;
+        height: 10%;
+        background: #0000aa;
+        flex-direction: column;
+        display: flex;
+        transition: right 0.3s ease;
+        x;
+    }
 
-  .nav-items.active {
-    right:0;
-    display: flex;
-  }
+        .nav-items.active {
+            right: 0;
+            display: flex;
+        }
 
-  .nav-items li {
-    padding: 10px;
-  }
+        .nav-items li {
+            padding: 10px;
+        }
 
-  .home-section {
-    padding: 0 20px 20px;
-    height: auto;
-  }
+    .home-section {
+        padding: 0 20px 20px;
+        height: auto;
+    }
 
-  .hero-heading {
-    padding-top: 20%;
-    font-size: 300%;
-  }
+    .hero-heading {
+        padding-top: 20%;
+        font-size: 300%;
+    }
 
-  .home-img {
-    height: 100%;
-    width: 50%;
-    height: auto;
-  }
+    .home-img {
+        height: 100%;
+        width: 50%;
+        height: auto;
+    }
 
-  .project-section {
-    padding: 150px 20px;
-  }
+    .project-section {
+        padding: 150px 20px;
+    }
 
-  .project-heading {
-    margin-top: 50px;
-    font-size: 50px;
-  }
+    .project-heading {
+        margin-top: 50px;
+        font-size: 50px;
+    }
 
-  .project-card {
-    padding-bottom:100px;
-    height: auto;
-  }
+    .project-card {
+        padding-bottom: 100px;
+        height: auto;
+    }
 
-  .project-img{
-  padding-bottom:50px;
-  }
+    .project-img {
+        padding-bottom: 50px;
+    }
 
-  .project-title{
-  font-size: 40px;
-  }
+    .project-title {
+        font-size: 40px;
+    }
 
-  .project-btn {
-    height: 40px;
-    text-transform: capitalize;
-    font-size: 10px;
-    border: 1px;
-    background: #ffffff;
-    color: #000000;
-    border-radius : 50%;
-    cursor: pointer;
-}
-  .about-section {
-    padding: 50px 20px;
-  }
+    .project-btn {
+        height: 40px;
+        text-transform: capitalize;
+        font-size: 10px;
+        border: 1px;
+        background: #ffffff;
+        color: #000000;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 
-  .about {
-    grid-template-columns: 1fr;
-  }
+    .about-section {
+        padding: 50px 20px;
+    }
 
-  .about-info {
-  font-size:15px;
-  }
-  
-  .download-cv-btn:hover, .download-cv-btn:active {
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .about-info {
+        font-size: 15px;
+    }
+
+    .download-cv-btn:hover, .download-cv-btn:active {
         background: #ff0077;
     }
-  .skill-section {
-    margin: 50px 0;
-  }
 
-  .heading {
-    font-size: 40px;
-  }
+    .skill-section {
+        margin: 50px 0;
+    }
 
-  .skills-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+    .heading {
+        font-size: 40px;
+    }
+
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 
 
 
-  .timeline .heading{
-    margin-bottom: 50px;
-  }
+    .timeline .heading {
+        margin-bottom: 50px;
+    }
 
     .card {
         width: 45%;
@@ -966,7 +969,7 @@ main {
         top: 80px;
         left: -100%;
     }
-
+}
 
 @media screen and  (max-width: 480px) {
 
