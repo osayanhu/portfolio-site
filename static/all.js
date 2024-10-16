@@ -30,4 +30,10 @@ dots.forEach(dot => {
     });
 });
 
-
+var wh = $(window).height();
+var waypoints = $('.skill-card').waypoint(function (direction) {
+    $(this.element).addClass('onScroll');
+    console.log(11);
+}, {
+    offset: wh - 50
+});

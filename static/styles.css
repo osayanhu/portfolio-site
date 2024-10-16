@@ -48,7 +48,7 @@ h1, h2, p {
     width: 15px;
     height: 15px;
     margin: 10px 0;
-    background-color: #000000;
+    background-color: red;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s;
