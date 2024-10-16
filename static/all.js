@@ -30,7 +30,7 @@ dots.forEach(dot => {
     });
 });
 
-document.getElementById('timeline-link').addEventListener('click', function (event) {
+document.getElementById('timeline').addEventListener('click', function (event) {
     event.preventDefault(); // Prevent default anchor click behavior
     const timeline = document.getElementById('timeline-div');
     const cards = timeline.querySelectorAll('.card');
