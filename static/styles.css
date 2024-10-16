@@ -26,8 +26,11 @@
 
 section {
     scroll-behavior: smooth;
+    background : transparent;
 }
-
+div{
+    background:transparent;
+}
 .dot-navigation {
     position: fixed;
     right: 20px;
