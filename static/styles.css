@@ -586,10 +586,14 @@ main {
     background: #ff0077;
 }
 
-.card:nth-child(even) {
-    margin-left: auto;
-}
+    .card:nth-child(even) {
+        margin-left: auto;
+        animation: transition-in-from-left 0.5s;
+    }
 
+    .card:nth-child(odd) {
+        animation: transition-in-from-right 0.5s;
+    }
 .card:nth-child(even):before {
     content: '';
     position: absolute;
@@ -664,6 +668,26 @@ main {
 
 .card-body {
     background-color: transparent;
+}
+
+@keyframes transition-in-from-left {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes transition-in-from-right {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
 }
 
 /* Footer styles */
@@ -923,6 +947,7 @@ main {
 
         .card:nth-child(even) {
             margin-left: auto;
+
         }
 
             .card:nth-child(even):before {
