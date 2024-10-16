@@ -966,8 +966,8 @@ main {
 
     .footer ul {
         height: 0vh;
-        top: 80px;
-        left: -100%;
+        top: 0px;
+        left: 0%;
     }
 }
 
