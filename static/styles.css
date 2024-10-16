@@ -569,7 +569,7 @@ main {
     animation: transition-in-from-left 8ss;
 }
 
-.skill-card:nth-child(4) .skill-card:nth-child(5) {
+.skill-card:nth-child(4){
     animation: transition-in-from-right 8s;
 }
 
