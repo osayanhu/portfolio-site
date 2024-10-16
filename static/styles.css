@@ -565,11 +565,22 @@ main {
     color: #4fdfff;
 }
 
-.skill-card:nth-child(1) .skill-card:nth-child(2) .skill-card:nth-child(3) {
-    animation: transition-in-from-left 8ss;
+.skill-card:nth-child(1) {
+    animation: transition-in-from-left 8s;
+}
+.skill-card:nth-child(2) {
+    animation: transition-in-from-left 8s;
 }
 
-.skill-card:nth-child(4){
+.skill-card:nth-child(3) {
+    animation: transition-in-from-left 8s;
+}
+
+.skill-card:nth-child(4) {
+    animation: transition-in-from-right 8s;
+}
+
+.skill-card:nth-child(5) {
     animation: transition-in-from-right 8s;
 }
 
