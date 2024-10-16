@@ -584,25 +584,15 @@ main {
     display: block;
     position: relative;
     background: #ff0077;
-    opacity: 0;
-    transform: translateX(-100%);
-    transition: all 0.5s ease-in-out;
 }
 
     .card:nth-child(even) {
         margin-left: auto;
-    }
-.card.animate-in {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-    .card.animate-in:nth-child(odd) {
-        animation: transition-in-from-left 0.5s;
+        animation: transition-in-from-left 8s;
     }
 
-    .card.animate-in:nth-child(even) {
-        animation: transition-in-from-right 0.5s;
+    .card:nth-child(odd) {
+        animation: transition-in-from-right 8s;
     }
 .card:nth-child(even):before {
     content: '';
