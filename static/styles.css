@@ -48,14 +48,14 @@ h1, h2 {
     width: 15px;
     height: 15px;
     margin: 10px 0;
-    background-color: white;
+    background-color: #000000;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
     .dot.active {
-        background-color: #000000;
+        background-color: #ffffff;
     }
 
 nav {
