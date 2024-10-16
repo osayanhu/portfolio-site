@@ -29,3 +29,17 @@ dots.forEach(dot => {
         target.scrollIntoView({ behavior: "smooth" });
     });
 });
+
+document.getElementById('timeline-link').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default anchor click behavior
+    const timeline = document.getElementById('timeline-div');
+    const cards = timeline.querySelectorAll('.card');
+
+    // Add the animation class to each card
+    cards.forEach(card => card.classList.add('animate-in'));
+
+    // Scroll to the timeline after a short delay to allow the animation to be visible
+    setTimeout(() => {
+        timeline.scrollIntoView({ behavior: 'smooth' });
+    }, 50); // Adjust the delay as needed
+});
