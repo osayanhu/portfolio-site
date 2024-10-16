@@ -565,7 +565,15 @@ main {
     color: #4fdfff;
 }
 
-/* Education and experience */
+.skill-card:nth-child(1) .skill-card:nth-child(2) .skill-card:nth-child(3) {
+    animation: transition-in-from-left 8ss;
+}
+
+.skill-card:nth-child(4) .skill-card:nth-child(5) {
+    animation: transition-in-from-right 8s;
+}
+
+* Education and experience */
 .timeline {
     display: block;
     width: 80%;
