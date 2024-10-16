@@ -15,7 +15,7 @@
     width: 100%;
     padding: 20px 80px;
     background-color: transparent;
-    display: flex;
+    display: block;
     justify-content: space-between;
     align-items: center;
     overflow-x: hidden;
