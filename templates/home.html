@@ -29,6 +29,13 @@
         </nav>
     </header>
 
+    <div class="dot-navigation">
+        <div class="dot" data-target="about"></div>
+        <div class="dot" data-target="projects"></div>
+        <div class="dot" data-target="skills"></div>
+        <div class="dot" data-target="timeline"></div>
+    </div>
+
     <section class="hero">
         <div class="hero-content">
             <h1>I am Osayanhu Imoisili</h1>
@@ -146,7 +153,7 @@
     </section>
 
     <!-- timeline -->
-    <div class="timeline" id="timeline">
+    <section class="timeline" id="timeline">
         <h1 class="heading">education and experience</h1>>
 
         <div class="card">
@@ -180,7 +187,7 @@
                 <p class="card-detail">Freelance Data Scientist </p>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -223,5 +230,7 @@
     </div>
     <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+    <script src="static/all.js"></script>
+
 </body>
 </html>
