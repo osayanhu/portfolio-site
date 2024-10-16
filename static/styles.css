@@ -31,6 +31,10 @@ section {
 div{
     background:transparent;
 }
+
+h1, h2 {
+    background:transparent;
+}
 .dot-navigation {
     position: fixed;
     right: 20px;
@@ -44,14 +48,14 @@ div{
     width: 15px;
     height: 15px;
     margin: 10px 0;
-    background-color: #ccc;
+    background-color: white;
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
     .dot.active {
-        background-color: #333;
+        background-color: #000000;
     }
 
 nav {
