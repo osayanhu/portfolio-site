@@ -139,6 +139,7 @@ a.active, a:hover {
         display: block;
         font-size: 26px;
         margin-top: 1.1em;
+        margin-right: 1em;
     }
 
     ul {
