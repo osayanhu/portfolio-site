@@ -343,6 +343,9 @@ main {
         .hero h2{
             font-size:2em;
         }
+    .dot-navigation{
+        display:none;
+    }
 }
 
 /* Project section */
