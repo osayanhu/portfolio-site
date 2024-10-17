@@ -332,7 +332,7 @@ main {
 /* Responsive Code */
 @media screen and (max-width: 952px) {
     .hero {
-        padding: 0 40px;
+        padding: .5em;
     }
 
         .hero h1 {
@@ -953,7 +953,7 @@ main {
     }
 
     .card {
-        width: 45%;
+        width: 65%;
         height: 20%;
         padding: 30px;
         border-radius: 10px;
