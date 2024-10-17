@@ -30,31 +30,3 @@ dots.forEach(dot => {
     });
 });
 
-$(document).ready(function () {
-    var wh = $(window).height(); // Get window height
-
-    // Create waypoints for each skill card
-    $('.skill-card').each(function () {
-        var skillCard = $(this); // Reference to the current skill card
-
-        // Create a waypoint for the 'enter' event
-        new Waypoint({
-            element: this,
-            handler: function (direction) {
-                // Restart animation when entering the viewport
-                skillCard.css('animationPlayState', 'running');
-            },
-            offset: wh - 50 // Trigger when the bottom of the element is within 50px of the viewport
-        });
-
-        // Create a waypoint for the 'leave' event
-        new Waypoint({
-            element: this,
-            handler: function (direction) {
-                // Pause animation when leaving the viewport
-                skillCard.css('animationPlayState', 'paused');
-            },
-            offset: 'bottom-in-view' // Trigger when the top of the element leaves the viewport
-        });
-    });
-});
