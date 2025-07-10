@@ -67,7 +67,7 @@ nav {
 label.logo {
     background: transparent;
     color: white;
-    font-size: 35px;
+    font-size: 22px;
     line-height: 86px;
     font-weight: bold;
 }
@@ -126,11 +126,11 @@ a.active, a:hover {
     }
 
     label.logo {
-        font-size: 26px;
+        font-size: 22px;
     }
 
     nav ul li a {
-        font-size: 20px;
+        font-size: 15px;
     }
 }
 
@@ -198,7 +198,6 @@ main {
 }
 
 .hero-content {
-    width: 600px;
     margin-top: 5em;
 }
 
@@ -230,6 +229,7 @@ main {
     justify-content: space-between;
     width: 350px;
     height: 50px;
+    margin-left: 25em;
 }
 
     .btn-box a {
@@ -334,7 +334,8 @@ main {
 /* Responsive Code */
 @media screen and (max-width: 952px) {
     .hero {
-        padding: .5em;
+        padding: 3em;
+        margin-top:3em;
     }
 
         .hero h1 {
@@ -349,11 +350,14 @@ main {
     }
 }
 
+.about-section{
+    padding: 75px 20px 50px;
+}
 /* Project section */
 .project-section {
     width: 100%;
     min-height: 100vh;
-    padding: 20em 100px 100px;
+    padding: 2em 100px 100px;
     position: relative;
     top: 0;
 }
@@ -941,6 +945,11 @@ main {
             height: auto;
         }
 
+        .btn-box {
+            margin-left: 10em;
+        }
+        
+
         .hero-heading {
             padding-top: 20%;
             font-size: 300%;
@@ -1134,10 +1143,16 @@ main {
         .course {
             width: 100%
         }
+
+        .footer {
+            padding: 1em 20px;
+        }
     }
 
     @media screen and (min-width : 769px) and (max-width: 1024px) {
-
+        .footer {
+            padding: 1em 20px;
+        }
         .hero-heading {
             font-size: 400%;
         }
