@@ -336,6 +336,7 @@ main {
     .hero {
         padding: 3em;
         margin-top:3em;
+        display: block;
     }
 
         .hero h1 {
