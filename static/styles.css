@@ -946,9 +946,13 @@ main {
         }
 
         .btn-box {
-            margin-left: 10em;
+            margin-left: 0em;
+            width: fit-content;
         }
         
+        .btn-box a{
+            margin-right: 1em;
+        }
 
         .hero-heading {
             padding-top: 20%;
@@ -1130,6 +1134,17 @@ main {
     }
 
     @media screen and (max-width: 480px) {
+        .btn-box{
+            margin: 0 auto;
+        }
+
+        .header-sec{
+            padding: :0 ;
+        }
+
+        .hero-content{
+            margin-top: 7em;
+        }
 
         .nav-items {
             height: 15%;
