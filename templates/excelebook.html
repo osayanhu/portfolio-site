@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel Functions Made Easy - Landing Page</title>
+    <!-- Social Icon Link (from your home HTML) -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="static/styles.css">
+
+    <!-- Styles specific to the ebook landing page, adopting your existing look -->
+    <!-- These overrides are for elements not covered by your general styles,
+         or for specific adjustments for the landing page layout. -->
+    <style>
+        .ebook-landing-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack vertically for mobile */
+            justify-content: center;
+            align-items: center;
+            padding: 3em 80px; /* Consistent with your .hero padding */
+            color: #ebebeb; /* Consistent with your hero-content text color */
+            text-align: center;
+        }
+
+        .ebook-image-wrapper {
+            width: 100%;
+            max-width: 350px; /* Adjust max-width for A4 aspect ratio (210mm x 297mm) */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 2em;
+            border-radius: 8px; /* Consistent with your btn-box border-radius */
+            overflow: hidden;
+            border: 2px solid #ff0077; /* Adding a border like your social icons/buttons */
+            box-shadow: 0 0 20px rgba(255, 0, 119, 0.5); /* Glowing effect */
+        }
+
+        .ebook-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ebook-content {
+            max-width: 700px;
+            margin-top: 2em;
+        }
+
+        .ebook-content h1 {
+            font-size: 3em; /* Adjusted for impact */
+            color: #ff0077; /* Accent color for the title */
+            margin-bottom: 0.5em;
+            text-align: center;
+            line-height: 1.2;
+            background: transparent; /* Ensure background is transparent if parent has one */
+        }
+
+        .ebook-content p {
+            font-size: 1.1em;
+            color: #ebebeb;
+            line-height: 1.6;
+            margin-bottom: 1.5em;
+            opacity: 0.8; /* Slightly subdued */
+            text-align: center;
+            background: transparent; /* Ensure background is transparent */
+        }
+
+        .ebook-features ul {
+            list-style: none; /* Remove default list style */
+            padding: 0;
+            margin-bottom: 2em;
+            text-align: left; /* Align features to the left */
+            color: #ebebeb;
+            font-size: 1em;
+            background: transparent;
+        }
+
+        .ebook-features li {
+            position: relative;
+            padding-left: 1.5em; /* Space for custom bullet */
+            margin-bottom: 0.5em;
+            background: transparent;
+        }
+
+        .ebook-features li::before {
+            content: '\2713'; /* Checkmark unicode character */
+            color: #ff0077; /* Accent color for checkmark */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            background: transparent;
+        }
+
+        /* Custom button for the ebook, mirroring .btn-box a */
+        .ebook-btn {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px; /* Adjusted width */
+            height: 50px;
+            background: #ff0077;
+            border: 2px solid #ff0077;
+            border-radius: 8px;
+            font-size: 18px;
+            color: #ebebeb;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-weight: 600;
+            z-index: 1;
+            overflow: hidden;
+            transition: 0.5s;
+            margin-top: 2em;
+            cursor: pointer;
+        }
+
+        .ebook-btn:hover {
+            color: #fff;
+        }
+
+        .ebook-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: #000;
+            z-index: -1;
+            border-radius: 8px;
+            transition: 0.5s;
+        }
+
+        .ebook-btn:hover::before {
+            width: 100%;
+        }
+
+        .secure-payment-text {
+            color: #ebebeb;
+            opacity: 0.6;
+            font-size: 0.9em;
+            margin-top: 1em;
+            background: transparent;
+        }
+
+        /* Responsive adjustments for ebook section */
+        @media screen and (max-width: 952px) {
+            .ebook-landing-container {
+                padding: 3em;
+            }
+            .ebook-content h1 {
+                font-size: 2.5em;
+            }
+            .ebook-content p {
+                font-size: 1em;
+            }
+            .ebook-btn {
+                width: 180px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+
+        @media screen and (max-width: 858px) {
+          .checkbtn {
+                margin-top: 0;
+            }
+            .ebook-landing-container {
+                padding: 2em;
+            }
+            .ebook-image-wrapper {
+                max-width: 280px; /* Smaller image on smaller screens */
+            }
+            .ebook-content h1 {
+                font-size: 2em;
+            }
+            .ebook-content p {
+                font-size: 0.9em;
+            }
+            .ebook-btn {
+                width: 160px;
+                height: 40px;
+                font-size: 15px;
+            }
+            .ebook-features li {
+                 text-align: center; /* Center align features on smaller screens */
+                 padding-left: 0; /* Remove padding for custom bullet */
+            }
+            .ebook-features li::before {
+                 display: none; /* Hide custom bullet if centered text is preferred */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .ebook-landing-container {
+                padding: 1em;
+                justify-content: flex-start; /* Align to top on very small screens */
+            }
+            .ebook-image-wrapper {
+                max-width: 200px; /* Even smaller image */
+                margin-top: 3em; /* Give some space from top */
+            }
+            .ebook-content h1 {
+                font-size: 1.8em;
+            }
+            .ebook-content p {
+                font-size: 0.8em;
+            }
+            .ebook-btn {
+                width: 100%; /* Full width button */
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-sec">
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fa fa-bars"></i>
+            </label>
+            <a href="/"><label class="logo">OSA<span>YANHU</span></label></a>
+            <ul>
+                <li><a href="/">Home</a></li> <!-- Link to your main portfolio home page -->
+                <li><a href="#" class="active">Excel Functions Ebook</a></li> <!-- Current page -->
+                <li><a href="/pythonebook">Python Programming Ebook</a></li> <!-- Link to Python Ebook -->
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Ebook Landing Content Section -->
+    <section class="ebook-landing-container hero">
+        <div class="ebook-image-wrapper">
+            <img src="static/images/excel_cover.png"
+                 alt="Excel Functions Made Easy Ebook Cover"
+                 class="ebook-image"
+                 onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';"
+            >
+        </div>
+
+        <div class="ebook-content">
+            <h1>Excel Functions Made Easy: A Beginner’s Guide</h1>
+            <p>
+                Unlock the full potential of Microsoft Excel with this comprehensive and easy-to-understand guide. Whether you're a complete beginner or looking to refresh your skills, this ebook will demystify essential Excel functions, making data analysis and reporting a breeze.
+            </p>
+
+            <div class="ebook-features">
+                <ul>
+                    <li>Master fundamental Excel formulas and functions.</li>
+                    <li>Learn practical examples for everyday tasks.</li>
+                    <li>Boost your productivity and data handling skills.</li>
+                    <li>Designed specifically for beginners.</li>
+                    <li>Clear, concise, and easy to follow.</li>
+                </ul>
+            </div>
+
+            <!-- Call to Action Button -->
+            <a href="https://flutterwave.com/pay/excelebook"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="ebook-btn"
+            >
+                Get Your Copy Now!
+            </a>
+
+            <p class="secure-payment-text">
+                Secure payment via Flutterwave.
+            </p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <ul class="social-icon">
+            <li class="social-icon__item">
+                <a class="social-icon__link" href="https://www.facebook.com/osayahnu.imoisili" target="_blank">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+            </li>
+            <li class="social-icon__item">
+                <a class="social-icon__link" href="https://www.x.com/osayanhu" target="_blank">
+                    <ion-icon name="logo-X"></ion-icon>
+                </a>
+            </li>
+            <li class="social-icon__item">
+                <a class="social-icon__link" href="https://www.linkedin.com/in/osayanhuimoisili" target="_blank">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+            </li>
+            <li class="social-icon__item">
+                <a class="social-icon__link" href="https://www.instagram.com/osayanhu" target="_blank">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+            </li>
+            <li class="social-icon__item">
+                <a class="social-icon__link" href="https://wa.me/2348105154556/?text=Hello!" target="_blank">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                </a>
+            </li>
+        </ul>
+        <p>&copy;2025 Osayanhu Imoisili</p>
+    </div>
+
+    <!-- IonIcons and other scripts from your home HTML -->
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+    <!-- Assuming you have all.js locally -->
+    <!-- <script src="static/all.js"></script> -->
+    <!-- Vercel Insights/Speed Insights scripts (if you want to include them) -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script src="/_vercel/insights/script.js"></script>
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

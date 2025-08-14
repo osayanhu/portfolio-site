@@ -15,9 +15,13 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/courses')
-def courses():
-    return render_template('courses.html')
+@app.route('/excelebook')
+def excel():
+    return render_template('excelebook.html')
+
+@app.route('/pythonebook')
+def python():
+    return render_template('pythonebook.html')
 
 
 @app.route('/', methods=['POST'])
