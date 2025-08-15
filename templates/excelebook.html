@@ -3,121 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excel Functions Made Easy - Landing Page</title>
-    <!-- Social Icon Link (from your home HTML) -->
+    <title>Introduction to Python Programming - Learn to Code & Earn!</title>
+    <!-- Social Icon Link -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Link to your external CSS file -->
     <link rel="stylesheet" href="static/styles.css">
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="static/images/my_logo.png">
 
-    <!-- Styles specific to the ebook landing page, adopting your existing look -->
-    <!-- These overrides are for elements not covered by your general styles,
-         or for specific adjustments for the landing page layout. -->
+    <!-- Styles specific to this ebook landing page AND the new modal -->
     <style>
         .ebook-landing-container {
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Stack vertically for mobile */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 3em 80px; /* Consistent with your .hero padding */
-            color: #ebebeb; /* Consistent with your hero-content text color */
+            padding: 3em 80px;
+            color: #ebebeb;
             text-align: center;
         }
 
         .ebook-image-wrapper {
             width: 100%;
-            max-width: 350px; /* Adjust max-width for A4 aspect ratio (210mm x 297mm) */
-            height: auto; /* Maintain aspect ratio */
+            max-width: 350px;
+            height: auto;
             margin-bottom: 2em;
-            border-radius: 8px; /* Consistent with your btn-box border-radius */
+            border-radius: 8px;
             overflow: hidden;
-            border: 2px solid #ff0077; /* Adding a border like your social icons/buttons */
-            box-shadow: 0 0 20px rgba(255, 0, 119, 0.5); /* Glowing effect */
+            border: 2px solid #ff0077;
+            box-shadow: 0 0 20px rgba(255, 0, 119, 0.5);
+            background: transparent;
         }
 
         .ebook-image {
             width: 100%;
             height: auto;
             display: block;
+            background: transparent;
         }
 
         .ebook-content {
             max-width: 700px;
             margin-top: 2em;
+            padding: 1.5em 2em; /* Reduced padding for more compact content */
+            border-radius: 12px;
+            background-color: rgba(26, 26, 26, 0.8); /* Slightly lighter dark background for content block */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            text-align: center; /* Ensure main content text is centered */
+            border: 1px solid rgba(255, 0, 119, 0.2); /* Subtle border matching accent */
         }
 
         .ebook-content h1 {
-            font-size: 3em; /* Adjusted for impact */
-            color: #ff0077; /* Accent color for the title */
-            margin-bottom: 0.5em;
-            text-align: center;
+            font-size: 2.8em; /* Impactful heading */
+            color: #ff0077;
+            margin-bottom: 0.8em;
             line-height: 1.2;
-            background: transparent; /* Ensure background is transparent if parent has one */
+            background: transparent;
         }
 
         .ebook-content p {
             font-size: 1.1em;
             color: #ebebeb;
             line-height: 1.6;
-            margin-bottom: 1.5em;
-            opacity: 0.8; /* Slightly subdued */
-            text-align: center;
-            background: transparent; /* Ensure background is transparent */
-        }
-
-        .ebook-features ul {
-            list-style: none; /* Remove default list style */
-            padding: 0;
-            margin-bottom: 2em;
-            text-align: left; /* Align features to the left */
-            color: #ebebeb;
-            font-size: 1em;
+            margin-bottom: 1.5em; /* Standard paragraph spacing */
+            opacity: 0.8;
             background: transparent;
         }
 
-        .ebook-features li {
-            position: relative;
-            padding-left: 1.5em; /* Space for custom bullet */
-            margin-bottom: 0.5em;
-            background: transparent;
-        }
-
-        .ebook-features li::before {
-            content: '\2713'; /* Checkmark unicode character */
-            color: #ff0077; /* Accent color for checkmark */
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-weight: bold;
-            background: transparent;
-        }
-
-        /* Custom button for the ebook, mirroring .btn-box a */
+        /* Call to Action Button */
         .ebook-btn {
-            position: relative;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            width: 200px; /* Adjusted width */
-            height: 50px;
-            background: #ff0077;
+            width: 300px; /* Slightly wider button for prominence */
+            height: 65px; /* Taller button for prominence */
+            background: linear-gradient(45deg, #ff0077, #e00066); /* Gradient for pop */
             border: 2px solid #ff0077;
             border-radius: 8px;
-            font-size: 18px;
-            color: #ebebeb;
+            font-size: 22px; /* Larger font */
+            color: #ffffff;
             text-decoration: none;
             letter-spacing: 1px;
-            font-weight: 600;
+            font-weight: 700;
             z-index: 1;
             overflow: hidden;
-            transition: 0.5s;
-            margin-top: 2em;
+            transition: all 0.5s ease;
+            margin: 2em auto 1em; /* Center button and provide spacing */
             cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 0, 119, 0.4); /* Stronger shadow */
+            position: relative;
         }
 
         .ebook-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(45deg, #e00066, #ff0077);
+            box-shadow: 0 8px 30px rgba(255, 0, 119, 0.6);
             color: #fff;
         }
 
@@ -125,17 +107,17 @@
             content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: 0;
+            left: -100%;
+            width: 100%;
             height: 100%;
-            background: #000;
+            background: rgba(255,255,255,0.15);
+            transition: all 0.5s ease;
+            transform: skewX(-20deg);
             z-index: -1;
-            border-radius: 8px;
-            transition: 0.5s;
         }
 
         .ebook-btn:hover::before {
-            width: 100%;
+            left: 100%;
         }
 
         .secure-payment-text {
@@ -146,73 +128,188 @@
             background: transparent;
         }
 
-        /* Responsive adjustments for ebook section */
+        /* Responsive adjustments */
         @media screen and (max-width: 952px) {
             .ebook-landing-container {
                 padding: 3em;
             }
             .ebook-content h1 {
-                font-size: 2.5em;
+                font-size: 2.2em;
             }
             .ebook-content p {
                 font-size: 1em;
             }
             .ebook-btn {
-                width: 180px;
-                height: 45px;
-                font-size: 16px;
+                width: 250px;
+                height: 55px;
+                font-size: 18px;
+            }
+            .ebook-content {
+                padding: 1.2em 1.5em;
+                margin: 1.5em auto;
+            }
+            /* Form input adjustments inside modal */
+            .payment-form {
+                max-width: 90%; /* Wider on smaller screens */
             }
         }
 
         @media screen and (max-width: 858px) {
-          .checkbtn {
-                margin-top: 0;
-            }
             .ebook-landing-container {
                 padding: 2em;
             }
             .ebook-image-wrapper {
-                max-width: 280px; /* Smaller image on smaller screens */
+                max-width: 280px;
             }
             .ebook-content h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             .ebook-content p {
                 font-size: 0.9em;
             }
             .ebook-btn {
-                width: 160px;
-                height: 40px;
-                font-size: 15px;
+                width: 200px;
+                height: 50px;
+                font-size: 16px;
             }
-            .ebook-features li {
-                 text-align: center; /* Center align features on smaller screens */
-                 padding-left: 0; /* Remove padding for custom bullet */
-            }
-            .ebook-features li::before {
-                 display: none; /* Hide custom bullet if centered text is preferred */
+            .ebook-content {
+                padding: 0.8em 1em;
+                margin: 1em auto;
             }
         }
 
         @media screen and (max-width: 480px) {
             .ebook-landing-container {
                 padding: 1em;
-                justify-content: flex-start; /* Align to top on very small screens */
+                justify-content: flex-start;
             }
             .ebook-image-wrapper {
-                max-width: 200px; /* Even smaller image */
-                margin-top: 3em; /* Give some space from top */
+                max-width: 180px;
+                margin-top: 2em;
             }
             .ebook-content h1 {
-                font-size: 1.8em;
+                font-size: 1.5em;
             }
             .ebook-content p {
                 font-size: 0.8em;
             }
             .ebook-btn {
-                width: 100%; /* Full width button */
+                width: 90%;
                 font-size: 14px;
+                height: 45px;
             }
+            .ebook-content {
+                padding: 0.6em 0.8em;
+                margin: 0.6em auto;
+            }
+        }
+
+        /* --- Modal Styles --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            backdrop-filter: blur(5px); /* Subtle blur effect */
+        }
+
+        .modal-content {
+            background-color: #1a1a1a; /* Dark background matching your theme */
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #ff0077; /* Accent border */
+            border-radius: 12px;
+            width: 90%; /* Responsive width */
+            max-width: 500px; /* Max width for larger screens */
+            position: relative;
+            box-shadow: 0 8px 30px rgba(255, 0, 119, 0.4); /* Glowing shadow */
+            animation: fadeInModal 0.3s ease-out; /* Fade in animation */
+            text-align: left; /* Align form content */
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            background: transparent;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #ff0077;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            color: #ff0077;
+            font-size: 2em;
+            margin-bottom: 1.5em;
+            background: transparent;
+        }
+
+        /* Payment Form Styles (inside modal) - Reused from previous step, but for modal inputs */
+        .payment-form {
+            width: 100%;
+            margin: 0 auto; /* Center form content inside modal */
+            background: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 1.5em;
+            background: transparent;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: #ebebeb;
+            font-size: 0.95em;
+            background: transparent;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: calc(100% - 20px); /* Account for padding */
+            padding: 12px; /* Slightly more padding for better touch input */
+            border: 1px solid #ff0077;
+            border-radius: 5px;
+            background-color: #0d0d0d; /* Even darker input background */
+            color: #ebebeb;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus {
+            border-color: #e00066;
+            box-shadow: 0 0 8px rgba(255, 0, 119, 0.5); /* Subtle glowing effect on focus */
+        }
+        /* Style for the button inside the modal's form */
+        .payment-form .ebook-btn {
+            margin-top: 2.5em; /* Add space above the button in modal */
+            width: 100%; /* Full width in modal */
         }
     </style>
 </head>
@@ -223,11 +320,11 @@
             <label for="check" class="checkbtn">
                 <i class="fa fa-bars"></i>
             </label>
-            <a href="/"><label class="logo">OSA<span>YANHU</span></label></a>
+            <a href="/" class="logo">OSA<span>YANHU</span></a>
             <ul>
-                <li><a href="/">Home</a></li> <!-- Link to your main portfolio home page -->
-                <li><a href="#" class="active">Excel Functions Ebook</a></li> <!-- Current page -->
-                <li><a href="/pythonebook">Python Programming Ebook</a></li> <!-- Link to Python Ebook -->
+                <li><a href="/">Home</a></li>
+                <li><a href="/excelebook>Excel Functions Ebook</a></li>
+                <li><a href="#" class="active">Python Programming Ebook</a></li>
             </ul>
         </nav>
     </header>
@@ -235,36 +332,29 @@
     <!-- Main Ebook Landing Content Section -->
     <section class="ebook-landing-container hero">
         <div class="ebook-image-wrapper">
-            <img src="static/images/excel_cover.png"
-                 alt="Excel Functions Made Easy Ebook Cover"
+            <img src="static/images/python_cover.jpg"
+                 alt="Introduction to Python Programming Ebook Cover"
                  class="ebook-image"
                  onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';"
             >
         </div>
 
         <div class="ebook-content">
-            <h1>Excel Functions Made Easy: A Beginner’s Guide</h1>
+            <h1>Learn Python, Start Coding, Boost Your Career in Nigeria!</h1>
             <p>
-                Unlock the full potential of Microsoft Excel with this comprehensive and easy-to-understand guide. Whether you're a complete beginner or looking to refresh your skills, this ebook will demystify essential Excel functions, making data analysis and reporting a breeze.
+                Ready to break into tech or automate tasks? This "Introduction to Python Programming" ebook is your fast-track to powerful coding skills, designed specifically for beginners in Nigeria.
+            </p>
+            <p>
+                Master **Python fundamentals**, tackle **real-world mini-projects**, and build a **strong foundation** for Data Science, Web Development, and AI. Gain a high-demand skill and open doors to new opportunities.
             </p>
 
-            <div class="ebook-features">
-                <ul>
-                    <li>Master fundamental Excel formulas and functions.</li>
-                    <li>Learn practical examples for everyday tasks.</li>
-                    <li>Boost your productivity and data handling skills.</li>
-                    <li>Designed specifically for beginners.</li>
-                    <li>Clear, concise, and easy to follow.</li>
-                </ul>
-            </div>
-
-            <!-- Call to Action Button -->
-            <a href="https://flutterwave.com/pay/excelebook"
-               target="_blank"
+            <!-- Original Call to Action Button (now opens the form modal) -->
+            <a href="javascript:void(0)"
                rel="noopener noreferrer"
                class="ebook-btn"
+               id="openPaymentFormBtn"
             >
-                Get Your Copy Now!
+                Start Learning Python for ₦3,000!
             </a>
 
             <p class="secure-payment-text">
@@ -272,6 +362,31 @@
             </p>
         </div>
     </section>
+
+    <!-- Payment Form Modal HTML -->
+    <div id="paymentFormModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Enter Your Details</h2>
+            <form id="customerDetailsForm" class="payment-form">
+                <div class="form-group">
+                    <label for="modal_customer_name">Your Full Name:</label>
+                    <input type="text" id="modal_customer_name" name="customer_name" placeholder="E.g., John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal_customer_email">Your Email Address:</label>
+                    <input type="email" id="modal_customer_email" name="customer_email" placeholder="E.g., john.doe@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal_customer_phone">Your Phone Number:</label>
+                    <input type="tel" id="modal_customer_phone" name="customer_phone" placeholder="E.g., 08012345678" required>
+                </div>
+                <button type="submit" class="ebook-btn">
+                    Proceed to Payment
+                </button>
+            </form>
+        </div>
+    </div>
 
     <div class="footer">
         <ul class="social-icon">
@@ -309,6 +424,90 @@
     <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
     <!-- Assuming you have all.js locally -->
     <!-- <script src="static/all.js"></script> -->
+
+    <!-- Flutterwave Payment Integration -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <script>
+        // Get elements
+        const openPaymentFormBtn = document.getElementById('openPaymentFormBtn');
+        const paymentFormModal = document.getElementById('paymentFormModal');
+        const modalCloseBtn = document.querySelector('.modal-close');
+        const customerDetailsForm = document.getElementById('customerDetailsForm');
+
+        // Open the form modal when the main "Start Learning Python" button is clicked
+        openPaymentFormBtn.addEventListener('click', function() {
+            paymentFormModal.style.display = 'flex'; // Use flex to center the modal content
+        });
+
+        // Close the form modal when the close button is clicked
+        modalCloseBtn.addEventListener('click', function() {
+            paymentFormModal.style.display = 'none';
+        });
+
+        // Close the modal if user clicks outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target == paymentFormModal) {
+                paymentFormModal.style.display = 'none';
+            }
+        });
+
+        // Handle form submission inside the modal
+        customerDetailsForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission (page reload)
+
+            // Get the values from the input fields in the modal
+            const customerName = document.getElementById('modal_customer_name').value;
+            const customerEmail = document.getElementById('modal_customer_email').value;
+            const customerPhone = document.getElementById('modal_customer_phone').value;
+
+            // Basic validation (can be enhanced for better user feedback)
+            if (!customerName || !customerEmail || !customerPhone) {
+                // Using alert() here for quick demo. In a production app, use a custom, styled message box.
+                alert("Please fill in all your details to proceed.");
+                return;
+            }
+
+            // Close the customer details modal before opening Flutterwave
+            paymentFormModal.style.display = 'none';
+
+            // Now, initiate Flutterwave payment
+            const FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK-b9e769dcff8ad603d1f5216827f2aa99-X'; // IMPORTANT: REPLACE THIS!
+
+            FlutterwaveCheckout({
+                public_key: FLUTTERWAVE_PUBLIC_KEY,
+                tx_ref: "exeBOOK_TX_" + Date.now() + "_" + Math.floor(Math.random() * 1000000000000000), // Unique transaction reference
+                amount: 3000, // Ebook price in NGN
+                currency: "NGN",
+                country: "NG", // Nigeria
+                payment_options: "card, mobilemoney, ussd, banktransfer", // ADDED banktransfer
+
+                customer: {
+                    email: customerEmail,
+                    phone_number: customerPhone,
+                    name: customerName,
+                },
+                customizations: {
+                    title: "Introduction to Python Programming Ebook",
+                    description: "Payment for Python Programming Ebook",
+                    logo: "static/images/my_logo.png", // Replace with your logo URL
+                },
+                callback: function (response) {
+                    console.log('Payment response:', response);
+                    if (response.status === 'successful') {
+                        // IMPORTANT: Verify this payment on your server-side before giving access to the ebook!
+                        alert("Payment successful! Please check your email for the ebook download link shortly.");
+                        // Example: window.location.href = "your-success-page.html";
+                    } else {
+                        alert("Payment failed or cancelled. Please try again.");
+                    }
+                },
+                onclose: function() {
+                    console.log('Payment modal closed');
+                }
+            });
+        });
+    </script>
+
     <!-- Vercel Insights/Speed Insights scripts (if you want to include them) -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
