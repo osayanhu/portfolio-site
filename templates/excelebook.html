@@ -323,29 +323,30 @@
             <a href="/" class="logo">OSA<span>YANHU</span></a>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/excelebook">Excel Functions Ebook</a></li>
-                <li><a href="#" class="active">Python Programming Ebook</a></li>
+                <li><a href="#">Excel Functions Ebook</a></li>
+                <li><a href="/pythonebook" class="active">Python Programming Ebook</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Ebook Landing Content Section -->
+
+        <!-- Main Ebook Landing Content Section -->
     <section class="ebook-landing-container hero">
         <div class="ebook-image-wrapper">
-            <img src="static/images/python_cover.jpg"
-                 alt="Introduction to Python Programming Ebook Cover"
+            <img src="static/images/excel_cover.png"
+                 alt="Excel Functions Made Easy Ebook Cover"
                  class="ebook-image"
                  onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';"
             >
         </div>
 
         <div class="ebook-content">
-            <h1>Learn Python, Start Coding, Boost Your Career in Nigeria!</h1>
+            <h1>Master Excel, Conquer Spreadsheets, Boost Your Career!</h1>
             <p>
-                Ready to break into tech or automate tasks? This "Introduction to Python Programming" ebook is your fast-track to powerful coding skills, designed specifically for beginners in Nigeria.
+                Tired of Excel headaches? Spending too much time on manual data? "Excel Functions Made Easy: A Beginner’s Guide" is your quick solution to becoming an Excel pro in Nigeria.
             </p>
             <p>
-                Master <strong>Python fundamentals</strong>, tackle <strong>mini-projects</strong>, and build a <strong>strong foundation</strong> for Data Science, Web Development, and AI. Gain a high-demand skill and open doors to new opportunities.
+                This concise guide will teach you <strong>50>+ essential Excel functions</strong>, provide <strong>real-world Nigerian examples</strong>, and help you <strong>automate tasks</strong> to save hours. Gain a highly sought-after skill now.
             </p>
 
             <!-- Original Call to Action Button (now opens the form modal) -->
@@ -354,7 +355,7 @@
                class="ebook-btn"
                id="openPaymentFormBtn"
             >
-                Start Learning Python for ₦3,000!
+                Get Your Copy for ₦2,500!
             </a>
 
             <p class="secure-payment-text">
@@ -476,7 +477,7 @@
             FlutterwaveCheckout({
                 public_key: FLUTTERWAVE_PUBLIC_KEY,
                 tx_ref: "exeBOOK_TX_" + Date.now() + "_" + Math.floor(Math.random() * 1000000000000000), // Unique transaction reference
-                amount: 3000, // Ebook price in NGN
+                amount: 2500, // Ebook price in NGN
                 currency: "NGN",
                 country: "NG", // Nigeria
                 payment_options: "card, mobilemoney, ussd, banktransfer", // ADDED banktransfer
@@ -487,8 +488,8 @@
                     name: customerName,
                 },
                 customizations: {
-                    title: "Introduction to Python Programming Ebook",
-                    description: "Payment for Python Programming Ebook",
+                    title: "Excel Functions Made Easy Ebook",
+                    description: "Payment for Excel Ebook",
                     logo: "static/images/my_logo.png", // Replace with your logo URL
                 },
                 callback: function (response) {
