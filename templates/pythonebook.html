@@ -311,6 +311,39 @@
             margin-top: 2.5em; /* Add space above the button in modal */
             width: 100%; /* Full width in modal */
         }
+
+        /* Loader Styles */
+        .loader-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1001; /* Higher than modal */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            flex-direction: column; /* To stack spinner and text */
+            color: #ff0077;
+            font-size: 1.2em;
+        }
+
+        .spinner {
+            border: 6px solid rgba(255, 255, 255, 0.3); /* Light border */
+            border-top: 6px solid #ff0077; /* Colored border for animation */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -320,10 +353,10 @@
             <label for="check" class="checkbtn">
                 <i class="fa fa-bars"></i>
             </label>
-            <a href="index.html" class="logo">OSA<span>YANHU</span></a>
+            <a href="/" class="logo">OSA<span>YANHU</span></a>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="excel-ebook.html">Excel Functions Ebook</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/excelebook.">Excel Functions Ebook</a></li>
                 <li><a href="#" class="active">Python Programming Ebook</a></li>
             </ul>
         </nav>
@@ -332,7 +365,7 @@
     <!-- Main Ebook Landing Content Section -->
     <section class="ebook-landing-container hero">
         <div class="ebook-image-wrapper">
-            <img src="https://placehold.co/400x566/000000/ff0077?text=Introduction%0ATo%0APython%0AProgramming%0AEbook"
+            <img src="static/images/python_cover.jpg"
                  alt="Introduction to Python Programming Ebook Cover"
                  class="ebook-image"
                  onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';"
@@ -362,7 +395,11 @@
             </p>
         </div>
     </section>
-
+       <!-- Loader HTML -->
+    <div id="loader" class="loader-overlay">
+        <div class="spinner"></div>
+        <p>Loading payment...</p>
+    </div>
     <!-- Payment Form Modal HTML -->
     <div id="paymentFormModal" class="modal-overlay">
         <div class="modal-content">
@@ -433,8 +470,9 @@
         const paymentFormModal = document.getElementById('paymentFormModal');
         const modalCloseBtn = document.querySelector('.modal-close');
         const customerDetailsForm = document.getElementById('customerDetailsForm');
+        const loader = document.getElementById('loader'); // Get the loader element
 
-        // Open the form modal when the main "Start Learning Python" button is clicked
+        // Open the form modal when the main "Get Your Copy" button is clicked
         openPaymentFormBtn.addEventListener('click', function() {
             paymentFormModal.style.display = 'flex'; // Use flex to center the modal content
         });
@@ -450,7 +488,6 @@
                 paymentFormModal.style.display = 'none';
             }
         });
-
         // Handle form submission inside the modal
         customerDetailsForm.addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission (page reload)

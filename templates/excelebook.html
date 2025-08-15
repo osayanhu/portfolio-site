@@ -311,6 +311,39 @@
             margin-top: 2.5em; /* Add space above the button in modal */
             width: 100%; /* Full width in modal */
         }
+
+        /* Loader Styles */
+        .loader-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1001; /* Higher than modal */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            flex-direction: column; /* To stack spinner and text */
+            color: #ff0077;
+            font-size: 1.2em;
+        }
+
+        .spinner {
+            border: 6px solid rgba(255, 255, 255, 0.3); /* Light border */
+            border-top: 6px solid #ff0077; /* Colored border for animation */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -420,6 +453,11 @@
         <p>&copy;2025 Osayanhu Imoisili</p>
     </div>
 
+       <!-- Loader HTML -->
+    <div id="loader" class="loader-overlay">
+        <div class="spinner"></div>
+        <p>Loading payment...</p>
+    </div>
     <!-- IonIcons and other scripts from your home HTML -->
     <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
@@ -434,8 +472,9 @@
         const paymentFormModal = document.getElementById('paymentFormModal');
         const modalCloseBtn = document.querySelector('.modal-close');
         const customerDetailsForm = document.getElementById('customerDetailsForm');
+        const loader = document.getElementById('loader'); // Get the loader element
 
-        // Open the form modal when the main "Start Learning Python" button is clicked
+        // Open the form modal when the main "Get Your Copy" button is clicked
         openPaymentFormBtn.addEventListener('click', function() {
             paymentFormModal.style.display = 'flex'; // Use flex to center the modal content
         });
