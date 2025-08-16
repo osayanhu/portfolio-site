@@ -133,7 +133,7 @@ a.active, a:hover {
 
 @media screen and (max-width: 952px) {
     .header-sec {
-        padding: 1em;
+        padding: .8em;
     }
 
     label.logo {
@@ -152,7 +152,6 @@ a.active, a:hover {
     .checkbtn {
         display: block;
         font-size: 26px;
-        margin-top: 1.1em;
         margin-right: 1em;
     }
 
