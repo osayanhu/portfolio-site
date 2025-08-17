@@ -464,30 +464,28 @@
         <div class="spinner"></div>
         <p>Loading payment...</p>
     </div>
-    <!-- Payment Form Modal HTML -->
-    <div id="paymentFormModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Enter Your Details</h2>
-            <form id="customerDetailsForm" class="payment-form">
-                <div class="form-group">
-                    <label for="modal_customer_name">Your Full Name:</label>
-                    <input type="text" id="modal_customer_name" name="customer_name" placeholder="E.g., John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="modal_customer_email">Your Email Address:</label>
-                    <input type="email" id="modal_customer_email" name="customer_email" placeholder="E.g., john.doe@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="modal_customer_phone">Your Phone Number:</label>
-                    <input type="tel" id="modal_customer_phone" name="customer_phone" placeholder="E.g., 08012345678" required>
-                </div>
-                <button type="submit" class="ebook-btn">
-                    Proceed to Payment
-                </button>
-            </form>
-        </div>
-    </div>
+    <<!-- Payment Form Modal HTML -->
+<div id="paymentFormModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="modal-close" id="closePaymentFormModal">&times;</span>
+    <h2>Enter Your Details</h2>
+    <form id="customerDetailsForm" class="payment-form">
+      <div class="form-group">
+        <label for="modal_customer_name">Your Full Name:</label>
+        <input type="text" id="modal_customer_name" name="customer_name" required>
+      </div>
+      <div class="form-group">
+        <label for="modal_customer_email">Your Email Address:</label>
+        <input type="email" id="modal_customer_email" name="customer_email" required>
+      </div>
+      <div class="form-group">
+        <label for="modal_customer_phone">Your Phone Number:</label>
+        <input type="tel" id="modal_customer_phone" name="customer_phone" required>
+      </div>
+      <button type="submit" class="ebook-btn">Proceed to Payment</button>
+    </form>
+  </div>
+</div>
 
     <div id="virtualAccountModal" class="modal-overlay">
         <div class="modal-content">
@@ -573,304 +571,159 @@
     <!-- Flutterwave Payment Integration -->
     <!-- Flutterwave SDK is NOT used for payment initiation in this virtual account flow -->
     <script>
-        // --- Configuration ---
-        const BACKEND_URL = 'osayanhu.vercel.app'; // IMPORTANT: Replace with your deployed backend URL
-        const ZAP_WEBHOOK_URL = 'https://python-proc-713130948738.us-central1.run.app/zap/webhook';
-       // --- Get HTML Elements ---
-        // --- Get HTML Elements ---
-        const openPaymentFormBtn = document.getElementById('openPaymentFormBtn');
-        const paymentFormModal = document.getElementById('paymentFormModal');
-        const closePaymentFormModalBtn = document.getElementById('closePaymentFormModal');
-        const customerDetailsForm = document.getElementById('customerDetailsForm');
-        const loader = document.getElementById('loader');
+  // --- Config ---
+  const BACKEND_URL = "http://127.0.0.1:5000/"; 
+const ZAP_WEBHOOK_URL = "https://python-proc-713130948738.us-central1.run.app/zap/webhook";
 
-        const virtualAccountModal = document.getElementById('virtualAccountModal');
-        const closeVirtualAccountModalBtn = document.getElementById('closeVirtualAccountModal');
-        const countdownTimerDisplay = document.getElementById('countdown_timer');
-        const iHaveTransferredBtn = document.getElementById('iHaveTransferredBtn');
+// --- Elements ---
+const openPaymentFormBtn = document.getElementById("openPaymentFormBtn");
+const paymentFormModal = document.getElementById("paymentFormModal");
+const closePaymentFormModalBtn = document.getElementById("closePaymentFormModal");
+const customerDetailsForm = document.getElementById("customerDetailsForm");
+const loader = document.getElementById("loader");
 
-        const vaBankName = document.getElementById('va_bank_name');
-        const vaAccountNumber = document.getElementById('va_account_number');
-        const vaAccountName = document.getElementById('va_account_name');
-        const vaAmount = document.getElementById('va_amount');
+const virtualAccountModal = document.getElementById("virtualAccountModal");
+const closeVirtualAccountModalBtn = document.getElementById("closeVirtualAccountModal");
+const countdownTimerDisplay = document.getElementById("countdown_timer");
+const iHaveTransferredBtn = document.getElementById("iHaveTransferredBtn");
 
-        const purchaseSuccessModal = document.getElementById('purchaseSuccessModal'); // Get the new success modal element
+const vaBankName = document.getElementById("va_bank_name");
+const vaAccountNumber = document.getElementById("va_account_number");
+const vaAccountName = document.getElementById("va_account_name");
+const vaAmount = document.getElementById("va_amount");
 
-        let countdownInterval; // To store the interval for the countdown timer
-        let currentTxRef = ''; // To store the transaction reference for backend use
-        let customerFullname = ''; // To store customer's full name from form
-        let customerEmail = ''; // To store customer's email from form
-        
-        let pollingIntervalId; // To store the interval for polling
-        let pollingAttempts = 0;
-        const MAX_POLLING_ATTEMPTS = 30; // Max attempts (e.g., 30 * 7 seconds = 210 seconds = 3.5 minutes)
-        const POLLING_INTERVAL_MS = 7000; // 7 seconds as requested
+const purchaseSuccessModal = document.getElementById("purchaseSuccessModal");
 
-        // --- Event Listeners for Modals ---
+let countdownInterval;
+let currentTxRef = "";
+let customerFullname = "";
+let customerEmail = "";
+let pollingIntervalId;
+let pollingAttempts = 0;
+const MAX_POLLING_ATTEMPTS = 30;
+const POLLING_INTERVAL_MS = 7000;
 
-        // 1. Open Customer Details Modal
-        openPaymentFormBtn.addEventListener('click', function() {
-            fbq('track', 'AddToCart');
-            paymentFormModal.style.display = 'flex';
-        });
+// --- Open / Close modals ---
+openPaymentFormBtn.addEventListener("click", () => paymentFormModal.style.display = "flex");
+closePaymentFormModalBtn.addEventListener("click", () => paymentFormModal.style.display = "none");
+closeVirtualAccountModalBtn.addEventListener("click", () => {
+  virtualAccountModal.style.display = "none";
+  clearInterval(countdownInterval);
+  clearInterval(pollingIntervalId);
+});
+window.addEventListener("click", e => {
+  if (e.target === paymentFormModal) paymentFormModal.style.display = "none";
+  if (e.target === virtualAccountModal) {
+    virtualAccountModal.style.display = "none";
+    clearInterval(countdownInterval);
+    clearInterval(pollingIntervalId);
+  }
+});
 
-        // 2. Close Customer Details Modal
-        closePaymentFormModalBtn.addEventListener('click', function() {
-            paymentFormModal.style.display = 'none';
-        });
+// --- Customer Form ---
+customerDetailsForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  customerFullname = document.getElementById("modal_customer_name").value;
+  customerEmail = document.getElementById("modal_customer_email").value;
+  const customerPhone = document.getElementById("modal_customer_phone").value;
+  if (!customerFullname || !customerEmail || !customerPhone) {
+    alert("Fill all fields");
+    return;
+  }
 
-        // 3. Close Virtual Account Modal
-        closeVirtualAccountModalBtn.addEventListener('click', function() {
-            virtualAccountModal.style.display = 'none';
-            clearInterval(countdownInterval); // Stop the countdown
-            clearInterval(pollingIntervalId); // Stop polling if active
-            // In a real app, you might want to trigger a final backend check here
-            // or inform the user that the payment window has closed.
-        });
+  paymentFormModal.style.display = "none";
+  loader.style.display = "flex";
+  loader.querySelector("p").textContent = "Generating your virtual account...";
 
-        // Close any modal if user clicks outside of it
-        window.addEventListener('click', function(event) {
-            if (event.target == paymentFormModal) {
-                paymentFormModal.style.display = 'none';
-            }
-            if (event.target == virtualAccountModal) {
-                virtualAccountModal.style.display = 'none';
-                clearInterval(countdownInterval); // Stop the countdown
-                clearInterval(pollingIntervalId); // Stop polling if active
-            }
-        });
+  currentTxRef = "PYEBOOK_TX_" + Date.now();
 
-        // --- Handle Customer Details Form Submission ---
-        customerDetailsForm.addEventListener('submit', async function(event) {
-            event.preventDefault();
+  const formData = new URLSearchParams();
+  formData.append("name", customerFullname);
+  formData.append("email", customerEmail);
+  formData.append("phone_number", customerPhone);
+  formData.append("amount", 3000);
+  formData.append("tx_ref", currentTxRef);
 
-            // Store customer details for later use (Zapier webhook)
-            customerFullname = document.getElementById('modal_customer_name').value;
-            customerEmail = document.getElementById('modal_customer_email').value;
-            const customerPhone = document.getElementById('modal_customer_phone').value;
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/create-virtual-account`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formData.toString()
+    });
+    const data = await res.json();
+    if (res.ok && data.error === false) {
+      loader.style.display = "none";
+      vaBankName.textContent = data.bankName;
+      vaAccountNumber.textContent = data.accountNumber;
+      vaAccountName.textContent = data.transferNote || "OSAYANHU EBOOKS";
+      vaAmount.textContent = "3,000";
+      virtualAccountModal.style.display = "flex";
+      const expiry = new Date(data.expiresIn.replace(" ", "T"));
+      startCountdown(Math.floor((expiry.getTime() - Date.now()) / 1000));
+    } else {
+      loader.style.display = "none";
+      alert("Failed: " + (data.errMsg || data.message));
+    }
+  } catch (err) {
+    loader.style.display = "none";
+    alert("Error creating account");
+  }
+});
 
-            // Basic validation
-            if (!customerFullname || !customerEmail || !customerPhone) {
-                alert("Please fill in all your details to proceed.");
-                return;
-            }
+// --- Countdown ---
+function startCountdown(sec) {
+  clearInterval(countdownInterval);
+  countdownInterval = setInterval(() => {
+    let m = Math.floor(sec / 60);
+    let s = sec % 60;
+    countdownTimerDisplay.textContent = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+    if (sec-- <= 0) {
+      clearInterval(countdownInterval);
+      virtualAccountModal.style.display = "none";
+      // check once more on timeout
+      checkPaymentStatus();
+      alert("Payment window expired");
+    }
+  }, 1000);
+}
 
-            // Facebook Pixel: Initiate Checkout
-                fbq('track', 'InitiateCheckout');
+// --- Manual "I Have Transferred" ---
+iHaveTransferredBtn.addEventListener("click", () => {
+  virtualAccountModal.style.display = "none";
+  loader.style.display = "flex";
+  loader.querySelector("p").textContent = "Confirming your transfer...";
+  pollingAttempts = 0;
+  pollingIntervalId = setInterval(checkPaymentStatus, POLLING_INTERVAL_MS);
+  checkPaymentStatus();
+});
 
-            // Close the customer details modal
-            paymentFormModal.style.display = 'none';
-            // Show the loader
-            loader.style.display = 'flex';
-            loader.querySelector('p').textContent = 'Generating your virtual account...';
+// --- Polling + verify + Zapier ---
+async function checkPaymentStatus() {
+  pollingAttempts++;
+  if (pollingAttempts > MAX_POLLING_ATTEMPTS) {
+    clearInterval(pollingIntervalId);
+    loader.style.display = "none";
+    alert("Still confirming. Check email or contact support.");
+    return;
+  }
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/payment-status`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tx_ref: currentTxRef, name: customerFullname, email: customerEmail })
+    });
+    const data = await res.json();
 
-            // Generate a unique transaction reference for this attempt
-            currentTxRef = "PYEBOOK_TX_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
-
-            // Prepare data as form-urlencoded (as your Flask endpoint expects request.form)
-            const formData = new URLSearchParams();
-            formData.append('name', customerFullname);
-            formData.append('email', customerEmail);
-            formData.append('phone_number', customerPhone);
-            formData.append('amount', 3000); // Fixed amount for the ebook
-            formData.append('tx_ref', currentTxRef);
-
-            // --- ACTUAL API CALL TO YOUR BACKEND FOR VIRTUAL ACCOUNT CREATION ---
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/create-virtual-account`, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: formData.toString()
-                });
-                const data = await response.json(); // Parse the JSON response
-
-                // Check for the 'error' field in the response
-                if (response.ok && data.error === false) {
-                    loader.style.display = 'none'; // Hide loader
-
-                    // Populate virtual account details from the backend response
-                    vaBankName.textContent = data.bankName || 'Bank Transfer'; 
-                    vaAccountNumber.textContent = data.accountNumber;
-                    vaAccountName.textContent = data.transferNote || 'OSAYANHU EBOOKS'; // Use transferNote for account name
-                    vaAmount.textContent = parseFloat(3000).toLocaleString(); // Amount is fixed to 3000 from frontend
-
-                    virtualAccountModal.style.display = 'flex'; // Show the virtual account modal
-                    
-                    // Use expiresIn from the response, which is a timestamp string ("YYYY-MM-DD HH:MM:SS")
-                    // Convert to ISO format for Date object and calculate remaining seconds
-                    const expirationTimeDate = new Date(data.expiresIn.replace(' ', 'T')); 
-                    let remainingSeconds = Math.floor((expirationTimeDate.getTime() - Date.now()) / 1000); 
-                    startCountdown(Math.max(0, remainingSeconds)); // Start countdown, ensure it's not negative
-
-                    // Facebook Pixel: Add Payment Details
-                        fbq('track', 'AddPaymentInfo');
-
-                } else {
-                    loader.style.display = 'none';
-                    // Use errMsg from the error response or a generic message
-                    alert(`Failed to generate virtual account. Please try again or contact support. Error: ${data.errMsg || data.message || "Unknown error"}`);
-                }
-            } catch (error) {
-                console.error('Error creating virtual account:', error);
-                loader.style.display = 'none';
-                alert("An error occurred. Please check your internet connection and try again. (Check console for details)");
-            }
-        });
-
-        // --- Countdown Timer Logic ---
-        function startCountdown(duration) {
-            let timer = duration;
-            let minutes, seconds;
-
-            clearInterval(countdownInterval); // Clear any existing interval
-
-            countdownInterval = setInterval(() => {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                countdownTimerDisplay.textContent = minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(countdownInterval);
-                    virtualAccountModal.style.display = 'none'; // Close modal on expiry
-                    clearInterval(pollingIntervalId); // Stop polling if timer expires
-                    alert("Payment window expired. Please try again if you still wish to make payment.");
-                    // In a real application, you might also trigger a backend call to invalidate
-                    // the virtual account or update its status.
-                }
-            }, 1000);
-        }
-
-        // --- "I Have Transferred" Button Logic (Now Triggers Polling) ---
-        iHaveTransferredBtn.addEventListener('click', function() {
-            virtualAccountModal.style.display = 'none'; // Close the virtual account modal
-            clearInterval(countdownInterval); // Stop the countdown
-            
-            loader.style.display = 'flex';
-            loader.querySelector('p').textContent = 'Confirming your transfer...';
-            pollingAttempts = 0; // Reset polling attempts
-
-            // Start polling the backend for payment status
-            pollingIntervalId = setInterval(checkPaymentStatus, POLLING_INTERVAL_MS);
-            checkPaymentStatus(); // Run immediately on click
-        });
-
-        // --- Function to Poll Backend for Payment Status ---
-        async function checkPaymentStatus() {
-            pollingAttempts++;
-            console.log(`Polling attempt ${pollingAttempts} for tx_ref: ${currentTxRef}`);
-
-            if (pollingAttempts > MAX_POLLING_ATTEMPTS) {
-                clearInterval(pollingIntervalId);
-                loader.style.display = 'none';
-                alert("We are still confirming your payment. This might take a bit longer. Please check your email for updates or contact support.");
-                console.warn("Max polling attempts reached. Stopping polling.");
-                return;
-            }
-
-            try {
-                const response = await fetch(`${BACKEND_URL}/api/check-payment-status`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ txref: currentTxRef }) // Key is 'txref'
-                });
-                const data = await response.json();
-
-                // Based on your Flask function returning txRef, flwRef, and transactionComplete
-                if (response.ok && data.transactionComplete === true) {
-                    clearInterval(pollingIntervalId); // Stop polling
-                    loader.style.display = 'none'; // Hide loader
-                    
-                    // --- Send data to Zapier Webhook ---
-                    // Capture transaction time as a string (ISO format is good for webhooks)
-                    const transactionTime = new Date().toISOString(); 
-                    sendToZapWebhook(customerEmail, customerFullname, transactionTime);
-
-                    // --- Show Success Modal and Refresh Page ---
-                    purchaseSuccessModal.style.display = 'flex'; // Show the success modal
-                    
-                    // Facebook Pixel: Purchase
-                        fbq('track', 'Purchase', {value: 3000, currency: 'NGN'}); // Assuming ₦3000 as price
-                    
-
-                    // Refresh page after a short delay
-                    setTimeout(() => {
-                        window.location.reload(); // Reloads the current page
-                    }, 5000); // Refresh after 5 seconds
-
-                } else if (response.ok && data.transactionComplete === false) {
-                    console.log(`Payment status for ${currentTxRef}: Not complete yet. Polling again...`);
-                    loader.querySelector('p').textContent = `Confirming your transfer... (Attempt ${pollingAttempts}/${MAX_POLLING_ATTEMPTS})`;
-                    // Continue polling. No alert, just log.
-                } else {
-                    // Handle cases where response.ok is false or unexpected data structure
-                    console.error('Unexpected response from payment status check:', data);
-                    loader.querySelector('p').textContent = `Verification error. Retrying... (Attempt ${pollingAttempts}/${MAX_POLLING_ATTEMPTS})`;
-                }
-            } catch (error) {
-                console.error('Error checking payment status:', error);
-                loader.querySelector('p').textContent = `Network error. Retrying... (Attempt ${pollingAttempts}/${MAX_POLLING_ATTEMPTS})`;
-            }
-        }
-
-        // --- Function to send data to Zapier Webhook ---
-        async function sendToZapWebhook(email, fullname, transaction_time) {
-            try {
-                const response = await fetch(ZAP_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        fullname: fullname,
-                        transaction_time: transaction_time
-                    })
-                });
-                if (response.ok) {
-                    console.log('Data successfully sent to Zapier webhook.');
-                } else {
-                    console.error('Failed to send data to Zapier webhook:', response.status, response.statusText);
-                }
-            } catch (error) {
-                console.error('Error sending data to Zapier webhook:', error);
-            }
-        }
-
-        // Copy button functionality for Account Number
-        document.querySelectorAll('.copy-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const targetId = this.dataset.target;
-                const textToCopy = document.getElementById(targetId).textContent;
-                
-                // Use execCommand for broader iframe compatibility (or navigator.clipboard.writeText if not in iframe)
-                const textArea = document.createElement("textarea");
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    const successMessage = this.nextElementSibling; // Get the next sibling (span for success)
-                    if (successMessage) {
-                        successMessage.style.display = 'inline';
-                        setTimeout(() => {
-                            successMessage.style.display = 'none';
-                        }, 2000); // Hide after 2 seconds
-                    }
-                } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                }
-                document.body.removeChild(textArea);
-            });
-        });
-
-    </script>
-
+    if (data.status === "success") {
+      clearInterval(pollingIntervalId);
+      loader.style.display = "none";
+      purchaseSuccessModal.style.display = "flex";
+      setTimeout(() => location.reload(), 5000);
+    }
+  } catch (err) {
+    console.error("verify error", err);
+  }
+}
 
     <!-- Vercel Insights/Speed Insights scripts (if you want to include them) -->
     <script>
