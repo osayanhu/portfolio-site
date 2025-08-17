@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 import os
+from rave_python import Rave,RaveExceptions, Misc
 
 
 app = Flask(__name__)
@@ -23,6 +24,39 @@ def excel():
 def python():
     return render_template('pythonebook.html')
 
+@app.route("/api/create-virtual-account", methods=['POST'])
+def create_python_virtual_account():
+    rave = rave = Rave("FLWPUBK-b9e769dcff8ad603d1f5216827f2aa99-X", production=True)
+    email = request.form.get('email')
+    phone_number = request.form.get('phone_number')
+    first_name = (request.form.get('name')).split()[0]
+    last_name = ' '.join((request.form.get('name')).split()[1:])
+    amount = request.form.get('amount')
+    tx_ref = request.form.get('tx_ref')
+    payload = {
+        "tx_ref": tx_ref,
+        "amount": amount,
+        "currency": "NGN",
+        "email": email,
+        "phone_number": phone_number,
+        "first_name": first_name,
+        "last_name": last_name
+    }
+    try:
+        response = rave.BankTransfer.charge(payload)
+        return response
+    except RaveExceptions.TransactionChargeError as e:
+        return e.err
+
+@app.route('/api/check-payment-status', methods=['POST'])
+def check_payment_status():
+    rave = Rave("FLWPUBK-b9e769dcff8ad603d1f5216827f2aa99-X", production=True)
+    reference = request.json.get('txref')
+    try:
+        response = rave.BankTransfer.verify(reference)
+        return response
+    except RaveExceptions.TransactionVerificationError as e:
+        return e.err
 
 @app.route('/', methods=['POST'])
 def subscribe():
