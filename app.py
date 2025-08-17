@@ -17,7 +17,7 @@ app = Flask(__name__)
 MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
 MAILCHIMP_LIST_ID = '254358271b'
 MAILCHIMP_SERVER = 'us22'
-BASE_URL = "https://api.flutterwave.cloud"
+BASE_URL = "https://api.flutterwave.com/v4/"
 idempotency_key = str(uuid.uuid4())
 TOKEN_CACHE = {"access_token": None, "expires_at": 0}  # simple in-memory cache
 
