@@ -296,7 +296,7 @@ def start_offer():
         device_type = "desktop"
 
     # save to supabase
-    supabase.table("offers").insert({
+    supabase.table("conversions").insert({
         "sub_id": sub_id,
         "name": name,
         "email": email,
@@ -315,7 +315,7 @@ def postback():
         return "Missing sub_id", 400
 
     # Lookup user in Supabase
-    user_resp = supabase.table("offers").select("full_name, email").eq("sub_id", sub_id).execute()
+    user_resp = supabase.table("conversions").select("full_name, email").eq("sub_id", sub_id).execute()
     if not user_resp.data:
         return "User not found", 404
 
@@ -338,7 +338,7 @@ def postback():
         return f"Error forwarding to webhook: {e}", 500
 
     # Update conversion in DB
-    supabase.table("offers").update({
+    supabase.table("conversions").update({
         "status": "completed",
         "payout": payout,
         "completed_at": datetime.utcnow().isoformat()
