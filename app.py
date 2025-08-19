@@ -138,7 +138,7 @@ def send_html_email(to_email: str, subject: str, html: str):
 # --------------------------
 # GCS helpers
 # --------------------------
-service_account_info = json.loads(os.environ["GOOGLE_CREDENTIALS"])
+service_account_info = json.loads(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
 credentials = service_account.Credentials.from_service_account_info(service_account_info)
 client = storage.Client(credentials=credentials, project=credentials.project_id)
 
