@@ -275,7 +275,7 @@ url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
-MOBILE_OFFER = "https://www.transictiopool.wiki/click?offer_id=32308&pub_id=273841&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE&external_id={{sub_id}}"
+MOBILE_OFFER = "https://lnksforyou.com/view.php?id=5541795&pub=3285829"
 DESKTOP_OFFER = "https://lnksforyou.com/view.php?id=5540952&pub=3285829&sub_id={sub_id}"
 
 @app.route("/start", methods=["GET"])
