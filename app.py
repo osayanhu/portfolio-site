@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import requests
+from supabase import create_client, Client
+import re
+import subprocess
 import time
 import os, hmac, hashlib
 import json
@@ -145,8 +148,13 @@ client = storage.Client(credentials=credentials, project=credentials.project_id)
 def gcs_client():
     return storage.Client(credentials=credentials, project=credentials.project_id)
 
-def download_blob_to_bytes(bucket_name: str) -> bytes:
-    blob = gcs_client().bucket(bucket_name).blob('Original/pythonprog.pdf')
+def download_blob_to_bytes(bucket_name: str, cld: str) -> bytes:
+    if cld == 'python:'
+        blob = gcs_client().bucket(bucket_name).blob('Original/pythonprog.pdf')
+    elif cld == 'excel':
+        blob = gcs_client().bucket(bucket_name).blob('Original/excelebook.pdf')
+    else:
+        raise ValueError("Invalid class specified. Use 'python' or 'excel'.")
     return blob.download_as_bytes()
 
 def upload_bytes_to_blob(bucket_name: str, blob_name: str, data: bytes, content_type="application/pdf"):
@@ -197,6 +205,7 @@ def flutter_ebook():
     name = data.get("full_name")
     email = data.get("email")
     transaction_time = data.get("transaction_time")
+    cld = data.get("class")
 
     if not name or not email or not transaction_time:
         return jsonify({"error": "Missing full_name, email, or transaction_time"}), 400
@@ -204,7 +213,7 @@ def flutter_ebook():
     # Send initial response quickly so Flutter knows request is received
     # (Optional: you can process async with Celery/Cloud Tasks)
     try:
-        original_bytes = download_blob_to_bytes(GCS_BUCKET)
+        original_bytes = download_blob_to_bytes(GCS_BUCKET, cld)
     except Exception as e:
         return jsonify({"error": f"Failed to fetch original ebook: {e}"}), 500
 
@@ -230,7 +239,7 @@ def flutter_ebook():
 
     # Send notification email
     try:
-        ready_html = render_template("ebook_ready.html", name=name, download_link=signed_url)
+        ready_html = render_template("ebook_ready.html", name=name, cld=cld, download_link=signed_url)
         send_html_email(email, "Your ebook is ready", ready_html)
     except Exception as e:
         return jsonify({"error": f"Failed to send ready email: {e}"}), 500
@@ -260,8 +269,82 @@ def subscribe_to_mailchimp(name, email):
         }
     }
     response = requests.post(url, auth=('anystring', MAILCHIMP_API_KEY), json=data)
-    return response.json()
 
+# Supabase setup
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
+supabase: Client = create_client(url, key)
+
+MOBILE_OFFER = "https://www.transictiopool.wiki/click?offer_id=32308&pub_id=273841&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE&external_id={{sub_id}}"
+DESKTOP_OFFER = "https://lnksforyou.com/view.php?id=5540952&pub=3285829&sub_id={sub_id}"
+
+@app.route("/start", methods=["GET"])
+def start_offer():
+    name = request.args.get("name")
+    email = request.args.get("email")
+    user_agent = request.headers.get("User-Agent", "").lower()
+
+    # generate unique sub_id (you can also use email hash)
+    sub_id = str(uuid.uuid4())
+
+    # detect device
+    if re.search("mobile|android|iphone", user_agent):
+        offer_url = MOBILE_OFFER.format(sub_id=sub_id)
+        device_type = "mobile"
+    else:
+        offer_url = DESKTOP_OFFER.format(sub_id=sub_id)
+        device_type = "desktop"
+
+    # save to supabase
+    supabase.table("offers").insert({
+        "sub_id": sub_id,
+        "name": name,
+        "email": email,
+        "device": device_type,
+        "status": "started"
+    }).execute()
+
+    return redirect(offer_url)
+
+@app.route("/postback", methods=["GET"])
+def postback():
+    sub_id = request.args.get("sub_id") or request.args.get("pub_click_id")
+    payout = request.args.get("payout")
+
+    if not sub_id:
+        return "Missing sub_id", 400
+
+    # Lookup user in Supabase
+    user_resp = supabase.table("offers").select("full_name, email").eq("sub_id", sub_id).execute()
+    if not user_resp.data:
+        return "User not found", 404
+
+    user = user_resp.data[0]
+    full_name = user["full_name"]
+    email = user["email"]
+
+    # Build payload for file download
+    payload = {
+        "full_name": full_name,
+        "email": email,
+        "transaction_time": datetime.utcnow().isoformat(),
+        "class": "esel"
+    }
+    FLUTTER_WEBHOOK_URL = "osayanhu.vercel.app/flutter/ebook"
+    try:
+        r = requests.post(FLUTTER_WEBHOOK_URL, json=payload, timeout=10)
+        r.raise_for_status()
+    except Exception as e:
+        return f"Error forwarding to webhook: {e}", 500
+
+    # Update conversion in DB
+    supabase.table("offers").update({
+        "status": "completed",
+        "payout": payout,
+        "completed_at": datetime.utcnow().isoformat()
+    }).eq("sub_id", sub_id).execute()
+
+    return "OK", 200
 
 if __name__ == '__main__':
     app.run(debug=True)

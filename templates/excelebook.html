@@ -349,80 +349,69 @@
     </style>
 </head>
 <body>
-    <header class="header-sec">
-        <nav>
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <i class="fa fa-bars"></i>
-            </label>
-            <a href="/" class="logo">OSA<span>YANHU</span></a>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Excel Functions Ebook</a></li>
-                <li><a href="/pythonebook" class="active">Python Programming Ebook</a></li>
-            </ul>
-        </nav>
-    </header>
+   <header class="header-sec">
+    <nav>
+        <input type="checkbox" id="check" />
+        <label for="check" class="checkbtn"><i class="fa fa-bars"></i></label>
+        <a href="/" class="logo">OSA<span>YANHU</span></a>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Excel Functions eBook</a></li>
+            <li><a href="/pythonebook">Python Programming eBook</a></li>
+        </ul>
+    </nav>
+</header>
 
-
-        <!-- Main Ebook Landing Content Section -->
-    <section class="ebook-landing-container hero">
-        <div class="ebook-image-wrapper">
-            <img src="static/images/excel_cover.webp"
-                 alt="Excel Functions Made Easy Ebook Cover"
-                 class="ebook-image"
-                 onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';"
-            >
-        </div>
-
-        <div class="ebook-content">
-            <h1>Master Excel, Conquer Spreadsheets, Boost Your Career!</h1>
-            <p>
-                Tired of Excel headaches? Spending too much time on manual data? "Excel Functions Made Easy: A Beginner’s Guide" is your quick solution to becoming an Excel pro in Nigeria.
-            </p>
-            <p>
-                This concise guide will teach you <strong>50>+ essential Excel functions</strong>, provide <strong>real-world Nigerian examples</strong>, and help you <strong>automate tasks</strong> to save hours. Gain a highly sought-after skill now.
-            </p>
-
-            <!-- Original Call to Action Button (now opens the form modal) -->
-            <a href="javascript:void(0)"
-               rel="noopener noreferrer"
-               class="ebook-btn"
-               id="openPaymentFormBtn"
-            >
-                Get Your Copy for ₦2,500!
-            </a>
-
-            <p class="secure-payment-text">
-                Secure payment via Flutterwave.
-            </p>
-        </div>
-    </section>
-
-    <!-- Payment Form Modal HTML -->
-    <div id="paymentFormModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <h2>Enter Your Details</h2>
-            <form id="customerDetailsForm" class="payment-form">
-                <div class="form-group">
-                    <label for="modal_customer_name">Your Full Name:</label>
-                    <input type="text" id="modal_customer_name" name="customer_name" placeholder="E.g., John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="modal_customer_email">Your Email Address:</label>
-                    <input type="email" id="modal_customer_email" name="customer_email" placeholder="E.g., john.doe@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="modal_customer_phone">Your Phone Number:</label>
-                    <input type="tel" id="modal_customer_phone" name="customer_phone" placeholder="E.g., 08012345678" required>
-                </div>
-                <button type="submit" class="ebook-btn">
-                    Proceed to Payment
-                </button>
-            </form>
-        </div>
+<section class="ebook-landing-container hero">
+    <div class="ebook-image-wrapper">
+        <img src="static/images/excel_cover.webp"
+             alt="Excel Functions Made Easy eBook Cover"
+             class="ebook-image"
+             onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';">
     </div>
+
+    <div class="ebook-content">
+        <h1>Excel Functions Made Easy — Free eBook</h1>
+        <p>
+            Learn the **50+ most useful Excel functions**, see **real-world examples**, and start saving hours on spreadsheets.
+        </p>
+        <ul class="ebook-bullets">
+            <li>✅ <strong>Free</strong> — no payment required.</li>
+            <li>✅ <strong>Complete a quick offer</strong> to unlock access.</li>
+            <li>✅ We will <strong>email the eBook</strong> to you immediately after completion.</li>
+        </ul>
+        <p class="ebook-note">
+            This helps us keep the eBook free for everyone. Thank you!
+        </p>
+
+        <!-- CTA opens modal -->
+        <a href="javascript:void(0)" class="ebook-btn" id="openFormBtn">Get Your Free Copy</a>
+    </div>
+</section>
+
+<!-- Lead capture modal (name + email only) -->
+<div id="leadModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+        <span class="modal-close" id="closeModalBtn" aria-label="Close">&times;</span>
+        <h2 id="leadModalTitle">Enter your details to unlock</h2>
+
+        <form id="leadForm" class="payment-form" novalidate>
+            <div class="form-group">
+                <label for="customer_name">Your full name</label>
+                <input type="text" id="customer_name" name="customer_name" placeholder="e.g., Osayanhu Imoisili" required />
+            </div>
+            <div class="form-group">
+                <label for="customer_email">Your email address</label>
+                <input type="email" id="customer_email" name="customer_email" placeholder="e.g., you@example.com" required />
+            </div>
+
+            <button type="submit" class="ebook-btn">Continue to Offer</button>
+            <p class="ebook-note" style="text-align:center;margin-top:.8em;">
+                After you complete the offer, we’ll email the eBook to you automatically.
+            </p>
+        </form>
+    </div>
+</div>
 
     <div class="footer">
         <ul class="social-icon">
@@ -455,28 +444,67 @@
         <p>&copy;2025 Osayanhu Imoisili</p>
     </div>
 
-       <!-- Loader HTML -->
-    <div id="loader" class="loader-overlay">
-        <div class="spinner"></div>
-        <p>Loading payment...</p>
-    </div>
-    <!-- IonIcons and other scripts from your home HTML -->
-    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
-    <!-- Assuming you have all.js locally -->
-    <!-- <script src="static/all.js"></script> -->
+    <!-- Loader -->
+<div id="loader" class="loader-overlay" aria-hidden="true">
+    <div class="spinner"></div>
+    <p>Taking you to a quick offer…</p>
+</div>
 
-    <!-- Flutterwave Payment Integration -->
-    
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
 
-    <!-- Vercel Insights/Speed Insights scripts (if you want to include them) -->
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script src="/_vercel/insights/script.js"></script>
-    <script>
-        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-    </script>
-    <script src="/_vercel/speed-insights/script.js"></script>
+<!-- Page logic -->
+<script>
+(function(){
+    const modal = document.getElementById('leadModal');
+    const openBtn = document.getElementById('openFormBtn');
+    const closeBtn = document.getElementById('closeModalBtn');
+    const form = document.getElementById('leadForm');
+    const loader = document.getElementById('loader');
+
+    function openModal(){ modal.style.display = 'flex'; modal.setAttribute('aria-hidden','false'); }
+    function closeModal(){ modal.style.display = 'none'; modal.setAttribute('aria-hidden','true'); }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name  = document.getElementById('customer_name').value.trim();
+        const email = document.getElementById('customer_email').value.trim();
+
+        if(!name || !email){
+            alert('Please enter your name and email.');
+            return;
+        }
+
+        // Show loader and navigate to /start so the server:
+        // - logs name + email
+        // - detects device (mobile/desktop)
+        // - redirects to the correct CPA offer with sub_id=email
+        loader.style.display = 'flex';
+
+        // Pass both name and email so you can log them server-side
+        const qs = new URLSearchParams({ name, email }).toString();
+        // The backend should 302 to CPAlead from here:
+        window.location.href = `/start?${qs}`;
+    });
+})();
+</script>
+
+<!-- Vercel Insights (optional) -->
+<script>
+    window.va = window.va || function(){ (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script src="/_vercel/insights/script.js"></script>
+<script>
+    window.si = window.si || function(){ (window.siq = window.siq || []).push(arguments); };
+</script>
+<script src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
 </body>
 </html>
