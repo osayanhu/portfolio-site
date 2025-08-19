@@ -297,10 +297,10 @@ def start_offer():
 
     # save to supabase
     supabase.table("conversions").insert({
-        "sub_id": sub_id,
+        "click_id": sub_id,
         "name": name,
         "email": email,
-        "device": device_type,
+        "device_type": device_type,
         "status": "started"
     }).execute()
 
@@ -315,7 +315,7 @@ def postback():
         return "Missing sub_id", 400
 
     # Lookup user in Supabase
-    user_resp = supabase.table("conversions").select("full_name, email").eq("sub_id", sub_id).execute()
+    user_resp = supabase.table("conversions").select("full_name, email").eq("click_id", sub_id).execute()
     if not user_resp.data:
         return "User not found", 404
 
@@ -342,7 +342,7 @@ def postback():
         "status": "completed",
         "payout": payout,
         "completed_at": datetime.utcnow().isoformat()
-    }).eq("sub_id", sub_id).execute()
+    }).eq("click_id", sub_id).execute()
 
     return "OK", 200
 
