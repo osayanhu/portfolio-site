@@ -149,7 +149,7 @@ def gcs_client():
     return storage.Client(credentials=credentials, project=credentials.project_id)
 
 def download_blob_to_bytes(bucket_name: str, cld: str) -> bytes:
-    if cld == 'python:'
+    if cld == 'python':
         blob = gcs_client().bucket(bucket_name).blob('Original/pythonprog.pdf')
     elif cld == 'excel':
         blob = gcs_client().bucket(bucket_name).blob('Original/excelebook.pdf')
