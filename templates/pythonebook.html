@@ -530,6 +530,7 @@
             paymentFormModal.style.display = 'none';
 
             // Now, initiate Flutterwave payment
+            
             const FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK-806342cc21893264105fd376ab75d5ff-X'; // IMPORTANT: REPLACE THIS!
 
             FlutterwaveCheckout({
@@ -538,6 +539,7 @@
                 amount: 3000, // Ebook price in NGN
                 currency: "NGN",
                 country: "NG", // Nigeria
+                payment_options: "banktransfer, card, mobilemoney, ussd", // ADDED banktransfer
                 payment_options: "banktransfer, card, mobilemoney, ussd", // ADDED banktransfer
 
                 customer: {
