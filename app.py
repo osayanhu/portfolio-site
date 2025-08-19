@@ -143,7 +143,7 @@ credentials = service_account.Credentials.from_service_account_info(service_acco
 client = storage.Client(credentials=credentials, project=credentials.project_id)
 
 def gcs_client():
-    return storage.Client()
+    return storage.Client(credentials=credentials, project=credentials.project_id)
 
 def download_blob_to_bytes(bucket_name: str) -> bytes:
     blob = gcs_client().bucket(bucket_name).blob('Original/pythonprog.pdf')
