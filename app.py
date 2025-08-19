@@ -145,6 +145,10 @@ client = storage.Client(credentials=credentials, project=credentials.project_id)
 def gcs_client():
     return storage.Client()
 
+def download_blob_to_bytes(bucket_name: str) -> bytes:
+    blob = gcs_client().bucket(bucket_name).blob('Original/pythonprog.pdf')
+    return blob.download_as_bytes()
+
 def upload_bytes_to_blob(bucket_name: str, blob_name: str, data: bytes, content_type="application/pdf"):
     blob = gcs_client().bucket(bucket_name).blob(blob_name)
     blob.upload_from_string(data, content_type=content_type)
@@ -200,8 +204,7 @@ def flutter_ebook():
     # Send initial response quickly so Flutter knows request is received
     # (Optional: you can process async with Celery/Cloud Tasks)
     try:
-        with open("pythonprog.pdf", "rb") as f:
-            original_bytes = f.read()
+        original_bytes = download_blob_to_bytes(GCS_BUCKET)
     except Exception as e:
         return jsonify({"error": f"Failed to fetch original ebook: {e}"}), 500
 
