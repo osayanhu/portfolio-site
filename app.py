@@ -10,7 +10,6 @@ import os
 import uuid
 import datetime
 import smtplib
-from flask import Flask, request, jsonify, render_template
 from google.cloud import storage
 import fitz  # PyMuPDF
 from email.mime.text import MIMEText
