@@ -6,6 +6,15 @@ import json
 import uuid
 from rave_python import Rave,RaveExceptions, Misc
 from dotenv import load_dotenv
+import os
+import uuid
+import datetime
+import smtplib
+from flask import Flask, request, jsonify, render_template
+from google.cloud import storage
+import fitz  # PyMuPDF
+from email.mime.text import MIMEText
+from google.oauth2 import service_account
 
 load_dotenv()
 
@@ -17,7 +26,7 @@ app = Flask(__name__)
 MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
 MAILCHIMP_LIST_ID = '254358271b'
 MAILCHIMP_SERVER = 'us22'
-BASE_URL = "https://api.flutterwave.com/v4/"
+BASE_URL = "https://api.flutterwave.cloud/f4bexperience"
 idempotency_key = str(uuid.uuid4())
 TOKEN_CACHE = {"access_token": None, "expires_at": 0}  # simple in-memory cache
 
@@ -51,7 +60,14 @@ def get_flutterwave_token():
     response.raise_for_status()  # Raises an error if the request failed
     return token_data["access_token"]
 
-def create_flutterwave_customer(access_token, first_name, last_name, email):
+@app.route('/get-cus', methods=['POST'])
+def create_flutterwave_customer():
+
+    access_token = get_flutterwave_token()
+    first_name = request.args.get("first_name")
+    last_name = request.args.get("last_name")
+    email = request.args.get("email")
+    idempotency_key = str(uuid.uuid4())
     url = f"{BASE_URL}/customers"
     headers = {
         "Content-Type": "application/json",
@@ -67,8 +83,11 @@ def create_flutterwave_customer(access_token, first_name, last_name, email):
         "email": email
     }
     resp = requests.post(url, headers=headers, json=payload)
+    print("customer created", resp.json())
     resp.raise_for_status()
     return resp.json()["data"]["id"]
+
+
 
 def create_flutterwave_virtual_account(access_token, tx_ref, customer_id, amount, narration):
     url = f"{BASE_URL}/virtual-accounts"
@@ -102,79 +121,123 @@ def excel():
 def python():
     return render_template('pythonebook.html')
 
-@app.route("/api/create-virtual-account", methods=['POST'])
-def create_python_virtual_account():
-    email = request.form.get('email')
-    phone_number = request.form.get('phone_number')  # optional, Flutterwave doesn't strictly need it here
-    full_name = request.form.get('name')
-    first_name = full_name.split()[0]
-    last_name = ' '.join(full_name.split()[1:])
-    amount = request.form.get('amount')
-    
-    try:
-        # Step 1: Get token
-        token = get_flutterwave_token()
-        
-        # Step 2: Create customer
-        customer_id = create_flutterwave_customer(token, first_name, last_name, email)
-        
-        # Step 3: Create virtual account
-        va_data = create_flutterwave_virtual_account(token, customer_id, amount, full_name)
-        
-        return jsonify({"status": "success", "virtual_account": va_data})
-    except requests.HTTPError as e:
-        return jsonify({"status": "error", "message": str(e), "response": e.response.text}), 400
+SENDER_EMAIL = os.getenv("SENDER_EMAIL")  # Your Gmail address
+GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")  # App password from Google
+GCS_BUCKET = os.getenv("GCS_BUCKET")  # e.g. "my-ebooks-bucket"
+SIGNED_URL_EXP_HOURS = int(os.getenv("SIGNED_URL_EXP_HOURS", "72"))
 
-def verify_webhook_signature(request_data, header_hash):
-    hash_calculated = hmac.new(
-        key=FLW_SECRET_HASH.encode('utf-8'),
-        msg=request_data,
-        digestmod=hashlib.sha256
-    ).hexdigest()
-    return hmac.compare_digest(hash_calculated, header_hash)
+def send_html_email(to_email: str, subject: str, html: str):
+    msg = MIMEText(html, "html")
+    msg["To"] = to_email
+    msg["From"] = SENDER_EMAIL
+    msg["Subject"] = subject
 
-def verify_charge(charge_id=None, tx_ref=None):
-    if not charge_id and not tx_ref:
-        return {"error": "charge_id or tx_ref required"}
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(SENDER_EMAIL, GMAIL_APP_PASSWORD)
+        server.send_message(msg)
 
-    access_token = get_flutterwave_token()
-    headers = {"Authorization": f"Bearer {access_token}"}
+# --------------------------
+# GCS helpers
+# --------------------------
+SERVICE_ACCOUNT_FILE = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "credentials.json")
+credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE)
+client = storage.Client(credentials=credentials, project=credentials.project_id)
 
-    if charge_id:
-        url = f"https://api.flutterwave.cloud/developersandbox/charges/{charge_id}"
-    else:
-        url = f"https://api.flutterwave.cloud/developersandbox/transactions/{tx_ref}/verify"
+def gcs_client():
+    return storage.Client()
 
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    data = response.json()
+def upload_bytes_to_blob(bucket_name: str, blob_name: str, data: bytes, content_type="application/pdf"):
+    blob = gcs_client().bucket(bucket_name).blob(blob_name)
+    blob.upload_from_string(data, content_type=content_type)
 
-    # Optional: your custom logic to mark order as paid
-    if data.get("status") == "success" and data.get("data", {}).get("status") == "succeeded":
-        print("Payment verified:", data["data"])
-        # Do post-payment processing here
-        return {"status": "success", "data": data["data"]}
+def generate_signed_url(bucket_name: str, blob_name: str, hours: int) -> str:
+    blob = client.bucket(bucket_name).blob(blob_name)
+    return blob.generate_signed_url(
+        version="v4",
+        expiration=datetime.timedelta(hours=hours),
+        method="GET",
+    )
 
-    return {"status": "pending", "data": data.get("data")}
-
-@app.route('/api/payment-status', methods=['POST'])
-def payment_status():
-   data = request.get_data()
-   json_data = request.json
-   tx_ref = json_data.get("tx_ref")
-   result = verify_charge(tx_ref=tx_ref)
-   if result.get("status") == "success" and result.get("data", {}).get("status") == "succeeded":
-        # post-payment external processing (Zapier, etc)
-        requests.post(
-            "https://python-proc-713130948738.us-central1.run.app/zap/webhook",
-            json={
-                "name": json_data.get("name"),
-                "email": json_data.get("email"),
-                "tx_ref": json_data.get("tx_ref")
-            }
+# --------------------------
+# PDF stamping
+# --------------------------
+def stamp_pdf_bytes(pdf_bytes: bytes, stamp_text: str) -> bytes:
+    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    for page in doc:
+        rect = page.rect
+        margin_x, margin_y = 12, 12
+        fontsize = 8
+        text_rect = fitz.Rect(
+            rect.width - 200 - margin_x,
+            rect.height - 20 - margin_y,
+            rect.width - margin_x,
+            rect.height - margin_y
         )
-        return jsonify({"status": "success", "message": "Payment verified"}), 200
-   return jsonify({"status": "pending", "message": "Payment not yet completed"}), 200
+        page.insert_textbox(
+            text_rect,
+            stamp_text,
+            fontsize=fontsize,
+            fontname="helv",
+            color=(0, 0, 0),
+            align=1
+        )
+    stamped_bytes = doc.tobytes()
+    doc.close()
+    return stamped_bytes
+
+# --------------------------
+# Flutter endpoint
+# --------------------------
+@app.route("/flutter/ebook", methods=["POST"])
+def flutter_ebook():
+    data = request.get_json(force=True, silent=True) or {}
+    name = data.get("full_name")
+    email = data.get("email")
+    transaction_time = data.get("transaction_time")
+
+    if not name or not email or not transaction_time:
+        return jsonify({"error": "Missing full_name, email, or transaction_time"}), 400
+
+    # Send initial response quickly so Flutter knows request is received
+    # (Optional: you can process async with Celery/Cloud Tasks)
+    try:
+        with open("pythonprog.pdf", "rb") as f:
+            original_bytes = f.read()
+    except Exception as e:
+        return jsonify({"error": f"Failed to fetch original ebook: {e}"}), 500
+
+    # Stamp PDF
+    stamp = f"{email} | {transaction_time}"
+    try:
+        processed_bytes = stamp_pdf_bytes(original_bytes, stamp)
+    except Exception as e:
+        return jsonify({"error": f"Failed to stamp ebook: {e}"}), 500
+
+    # Upload processed copy
+    processed_key = f"processed/{uuid.uuid4()}.pdf"
+    try:
+        upload_bytes_to_blob(GCS_BUCKET, processed_key, processed_bytes)
+    except Exception as e:
+        return jsonify({"error": f"Failed to upload processed ebook: {e}"}), 500
+
+    # Create signed URL
+    try:
+        signed_url = generate_signed_url(GCS_BUCKET, processed_key, SIGNED_URL_EXP_HOURS)
+    except Exception as e:
+        return jsonify({"error": f"Failed to generate signed URL: {e}"}), 500
+
+    # Send notification email
+    try:
+        ready_html = render_template("ebook_ready.html", name=name, download_link=signed_url)
+        send_html_email(email, "Your ebook is ready", ready_html)
+    except Exception as e:
+        return jsonify({"error": f"Failed to send ready email: {e}"}), 500
+
+    return jsonify({
+        "status": "ok",
+        "message": "Ebook processed successfully",
+        "download_link": signed_url
+    })
 @app.route('/', methods=['POST'])
 def subscribe():
     name = request.form.get('name')

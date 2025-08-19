@@ -10,12 +10,8 @@
     <!-- Link to your external CSS file -->
     <link rel="stylesheet" href="static/styles.css">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="static/images/my_logo.webp">
+    <link rel="icon" type="image/x-icon" href="static/images/my_logo.png">
     <link rel="preconnect" href="https://checkout.flutterwave.com">
-    <!-- Preconnect to your backend and Flutterwave API for faster loading -->
-    <link rel="preconnect" href="https://osayanhu.vercel.app"> <!-- IMPORTANT: Replace with your actual deployed backend URL -->
-    <link rel="preconnect" href="https://api.flutterwave.cloud"> 
-    <link rel="preconnect" href="https://python-proc-713130948738.us-central1.run.app"> <!-- Preconnect for Zapier webhook -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7501475906311384"
      crossorigin="anonymous"></script>
     <!-- Meta Pixel Code -->
@@ -367,47 +363,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Virtual Account Modal Specific Styles */
-        .virtual-account-details p {
-            font-size: 1.1em;
-            margin-bottom: 0.8em;
-            background: transparent;
-            text-align: left; /* Ensure details are left-aligned within the modal content */
-        }
-        .virtual-account-details strong {
-            color: #ff0077;
-            background: transparent;
-        }
-        .countdown-timer {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #ff0077;
-            margin-top: 1.5em;
-            margin-bottom: 1.5em;
-            background: transparent;
-            text-align: center;
-        }
-        /* Style for copy button */
-        .copy-btn {
-            background-color: #555;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            margin-left: 10px;
-            transition: background-color 0.3s ease;
-        }
-        .copy-btn:hover {
-            background-color: #777;
-        }
-        .copy-success-message {
-            display: none;
-            color: #28a745; /* Green color for success */
-            font-size: 0.85em;
-            margin-left: 1
     </style>
 </head>
 <body>
@@ -429,7 +384,7 @@
     <!-- Main Ebook Landing Content Section -->
     <section class="ebook-landing-container hero">
         <div class="ebook-image-wrapper">
-            <img src="static/images/python_cover.webp"
+            <img src="static/images/python_cover.jpg"
                  alt="Introduction to Python Programming Ebook Cover"
                  class="ebook-image"
                  onerror="this.onerror=null;this.src='https://placehold.co/400x566/FCA5A5/DC2626?text=Image%20Not%20Found';"
@@ -464,64 +419,28 @@
         <div class="spinner"></div>
         <p>Loading payment...</p>
     </div>
-    <<!-- Payment Form Modal HTML -->
-<div id="paymentFormModal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="modal-close" id="closePaymentFormModal">&times;</span>
-    <h2>Enter Your Details</h2>
-    <form id="customerDetailsForm" class="payment-form">
-      <div class="form-group">
-        <label for="modal_customer_name">Your Full Name:</label>
-        <input type="text" id="modal_customer_name" name="customer_name" required>
-      </div>
-      <div class="form-group">
-        <label for="modal_customer_email">Your Email Address:</label>
-        <input type="email" id="modal_customer_email" name="customer_email" required>
-      </div>
-      <div class="form-group">
-        <label for="modal_customer_phone">Your Phone Number:</label>
-        <input type="tel" id="modal_customer_phone" name="customer_phone" required>
-      </div>
-      <button type="submit" class="ebook-btn">Proceed to Payment</button>
-    </form>
-  </div>
-</div>
-
-    <div id="virtualAccountModal" class="modal-overlay">
+    <!-- Payment Form Modal HTML -->
+    <div id="paymentFormModal" class="modal-overlay">
         <div class="modal-content">
-            <span class="modal-close" id="closeVirtualAccountModal">&times;</span>
-            <h2>Complete Your Payment</h2>
-            <div class="virtual-account-details">
-                <p>Please transfer <strong>₦<span id="va_amount">3,000</span></strong> to the account below within:</p>
-                <p class="countdown-timer" id="countdown_timer">05:00</p>
-
-                <p>Bank Name: <strong><span id="va_bank_name">Pro-Pay Bank</span></strong></p>
-                <p>
-                    Account Number: <strong><span id="va_account_number">9132456789</span></strong>
-                    <button class="copy-btn" data-target="va_account_number">Copy</button>
-                    <span class="copy-success-message">Copied!</span>
-                </p>
-                <p>Account Name: <strong><span id="va_account_name">OSAYANHU EBOOKS</span></strong></p>
-                
-                <p style="font-size: 0.9em; opacity: 0.7; margin-top: 1.5em; text-align: center;">
-                    Your payment will be automatically confirmed once we receive your transfer. You don't need to do anything else.
-                </p>
-            </div>
-            <button id="iHaveTransferredBtn" class="ebook-btn" style="margin-top: 2em;">
-                I Have Transferred (Optional)
-            </button>
-        </div>
-    </div>
-    <!-- New Modal: Purchase Success -->
-    <div id="purchaseSuccessModal" class="modal-overlay">
-        <div class="modal-content">
-            <h2>Payment Confirmed!</h2>
-            <p style="text-align: center; font-size: 1.1em; color: #28a745;">
-                Thank you for your purchase!
-            </p>
-            <p style="text-align: center; font-size: 0.9em; opacity: 0.7;">
-                This page will refresh shortly.
-            </p>
+            <span class="modal-close">&times;</span>
+            <h2>Enter Your Details</h2>
+            <form id="customerDetailsForm" class="payment-form">
+                <div class="form-group">
+                    <label for="modal_customer_name">Your Full Name:</label>
+                    <input type="text" id="modal_customer_name" name="customer_name" placeholder="E.g., John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal_customer_email">Your Email Address:</label>
+                    <input type="email" id="modal_customer_email" name="customer_email" placeholder="E.g., john.doe@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="modal_customer_phone">Your Phone Number:</label>
+                    <input type="tel" id="modal_customer_phone" name="customer_phone" placeholder="E.g., 08012345678" required>
+                </div>
+                <button type="submit" class="ebook-btn">
+                    Proceed to Payment
+                </button>
+            </form>
         </div>
     </div>
 
@@ -556,12 +475,6 @@
         <p>&copy;2025 Osayanhu Imoisili</p>
     </div>
 
-      <!-- Loader HTML -->
-    <div id="loader" class="loader-overlay">
-        <div class="spinner"></div>
-        <p>Generating your virtual account...</p>
-    </div>
-
     <!-- IonIcons and other scripts from your home HTML -->
     <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
@@ -569,162 +482,91 @@
     <!-- <script src="static/all.js"></script> -->
 
     <!-- Flutterwave Payment Integration -->
-    <!-- Flutterwave SDK is NOT used for payment initiation in this virtual account flow -->
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
     <script>
-  // --- Config ---
-  const BACKEND_URL = "osayanhu.vercel.app"; 
-const ZAP_WEBHOOK_URL = "https://python-proc-713130948738.us-central1.run.app/zap/webhook";
+        // Get elements
+        const openPaymentFormBtn = document.getElementById('openPaymentFormBtn');
+        const paymentFormModal = document.getElementById('paymentFormModal');
+        const modalCloseBtn = document.querySelector('.modal-close');
+        const customerDetailsForm = document.getElementById('customerDetailsForm');
+        const loader = document.getElementById('loader'); // Get the loader element
 
-// --- Elements ---
-const openPaymentFormBtn = document.getElementById("openPaymentFormBtn");
-const paymentFormModal = document.getElementById("paymentFormModal");
-const closePaymentFormModalBtn = document.getElementById("closePaymentFormModal");
-const customerDetailsForm = document.getElementById("customerDetailsForm");
-const loader = document.getElementById("loader");
+        // Open the form modal when the main "Get Your Copy" button is clicked
+        openPaymentFormBtn.addEventListener('click', function() {
+            paymentFormModal.style.display = 'flex'; // Use flex to center the modal content
+            fbq('track', 'InitiateCheckout'); // Track button click with Facebook Pixel
+        });
 
-const virtualAccountModal = document.getElementById("virtualAccountModal");
-const closeVirtualAccountModalBtn = document.getElementById("closeVirtualAccountModal");
-const countdownTimerDisplay = document.getElementById("countdown_timer");
-const iHaveTransferredBtn = document.getElementById("iHaveTransferredBtn");
+        // Close the form modal when the close button is clicked
+        modalCloseBtn.addEventListener('click', function() {
+            paymentFormModal.style.display = 'none';
+        });
 
-const vaBankName = document.getElementById("va_bank_name");
-const vaAccountNumber = document.getElementById("va_account_number");
-const vaAccountName = document.getElementById("va_account_name");
-const vaAmount = document.getElementById("va_amount");
+        // Close the modal if user clicks outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target == paymentFormModal) {
+                paymentFormModal.style.display = 'none';
+            }
+        });
+        // Handle form submission inside the modal
+        customerDetailsForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission (page reload)
 
-const purchaseSuccessModal = document.getElementById("purchaseSuccessModal");
+            fbq('track', 'AddPaymentInfo');
 
-let countdownInterval;
-let currentTxRef = "";
-let customerFullname = "";
-let customerEmail = "";
-let pollingIntervalId;
-let pollingAttempts = 0;
-const MAX_POLLING_ATTEMPTS = 30;
-const POLLING_INTERVAL_MS = 7000;
+            // Get the values from the input fields in the modal
+            const customerName = document.getElementById('modal_customer_name').value;
+            const customerEmail = document.getElementById('modal_customer_email').value;
+            const customerPhone = document.getElementById('modal_customer_phone').value;
 
-// --- Open / Close modals ---
-openPaymentFormBtn.addEventListener("click", () => paymentFormModal.style.display = "flex");
-closePaymentFormModalBtn.addEventListener("click", () => paymentFormModal.style.display = "none");
-closeVirtualAccountModalBtn.addEventListener("click", () => {
-  virtualAccountModal.style.display = "none";
-  clearInterval(countdownInterval);
-  clearInterval(pollingIntervalId);
-});
-window.addEventListener("click", e => {
-  if (e.target === paymentFormModal) paymentFormModal.style.display = "none";
-  if (e.target === virtualAccountModal) {
-    virtualAccountModal.style.display = "none";
-    clearInterval(countdownInterval);
-    clearInterval(pollingIntervalId);
-  }
-});
+            // Basic validation (can be enhanced for better user feedback)
+            if (!customerName || !customerEmail || !customerPhone) {
+                // Using alert() here for quick demo. In a production app, use a custom, styled message box.
+                alert("Please fill in all your details to proceed.");
+                return;
+            }
 
-// --- Customer Form ---
-customerDetailsForm.addEventListener("submit", async e => {
-  e.preventDefault();
-  customerFullname = document.getElementById("modal_customer_name").value;
-  customerEmail = document.getElementById("modal_customer_email").value;
-  const customerPhone = document.getElementById("modal_customer_phone").value;
-  if (!customerFullname || !customerEmail || !customerPhone) {
-    alert("Fill all fields");
-    return;
-  }
+            // Close the customer details modal before opening Flutterwave
+            paymentFormModal.style.display = 'none';
 
-  paymentFormModal.style.display = "none";
-  loader.style.display = "flex";
-  loader.querySelector("p").textContent = "Generating your virtual account...";
+            // Now, initiate Flutterwave payment
+            const FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK-200861865d53c78f87846075d2f43141-X'; // IMPORTANT: REPLACE THIS!
 
-  currentTxRef = "PYEBOOK_TX_" + Date.now();
+            FlutterwaveCheckout({
+                public_key: FLUTTERWAVE_PUBLIC_KEY,
+                tx_ref: "PYEBOOK_TX_" + Date.now() + "_" + Math.floor(Math.random() * 1000000000000000), // Unique transaction reference
+                amount: 3000, // Ebook price in NGN
+                currency: "NGN",
+                country: "NG", // Nigeria
+                payment_options: "banktransfer, card, mobilemoney, ussd", // ADDED banktransfer
 
-  const formData = new URLSearchParams();
-  formData.append("name", customerFullname);
-  formData.append("email", customerEmail);
-  formData.append("phone_number", customerPhone);
-  formData.append("amount", 3000);
-  formData.append("tx_ref", currentTxRef);
+                customer: {
+                    email: customerEmail,
+                    phone_number: customerPhone,
+                    name: customerName,
+                },
+                customizations: {
+                    title: "Introduction to Python Programming Ebook",
+                    description: "Payment for Python Programming Ebook",
+                    logo: "static/images/my_logo.png", // Replace with your logo URL
+                },
+                callback: function (response) {
+                    console.log('Payment response:', response);
+                    if (response.status === 'successful') {
+                        // IMPORTANT: Verify this payment on your server-side before giving access to the ebook!
+                        alert("Payment successful! Please check your email for the ebook download link shortly.");
+                        // Example: window.location.href = "your-success-page.html";
+                    } else {
+                        alert("Payment failed or cancelled. Please try again.");
+                    }
+                },
+                onclose: function() {
+                    console.log('Payment modal closed');
+                }
+            });
+        });
+    </script>
 
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/create-virtual-account`, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: formData.toString()
-    });
-    const data = await res.json();
-    if (res.ok && data.error === false) {
-      loader.style.display = "none";
-      vaBankName.textContent = data.bankName;
-      vaAccountNumber.textContent = data.accountNumber;
-      vaAccountName.textContent = data.transferNote || "OSAYANHU EBOOKS";
-      vaAmount.textContent = "3,000";
-      virtualAccountModal.style.display = "flex";
-      const expiry = new Date(data.expiresIn.replace(" ", "T"));
-      startCountdown(Math.floor((expiry.getTime() - Date.now()) / 1000));
-    } else {
-      loader.style.display = "none";
-      alert("Failed: " + (data.errMsg || data.message));
-    }
-  } catch (err) {
-    loader.style.display = "none";
-    alert("Error creating account");
-  }
-});
-
-// --- Countdown ---
-function startCountdown(sec) {
-  clearInterval(countdownInterval);
-  countdownInterval = setInterval(() => {
-    let m = Math.floor(sec / 60);
-    let s = sec % 60;
-    countdownTimerDisplay.textContent = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
-    if (sec-- <= 0) {
-      clearInterval(countdownInterval);
-      virtualAccountModal.style.display = "none";
-      // check once more on timeout
-      checkPaymentStatus();
-      alert("Payment window expired");
-    }
-  }, 1000);
-}
-
-// --- Manual "I Have Transferred" ---
-iHaveTransferredBtn.addEventListener("click", () => {
-  virtualAccountModal.style.display = "none";
-  loader.style.display = "flex";
-  loader.querySelector("p").textContent = "Confirming your transfer...";
-  pollingAttempts = 0;
-  pollingIntervalId = setInterval(checkPaymentStatus, POLLING_INTERVAL_MS);
-  checkPaymentStatus();
-});
-
-// --- Polling + verify + Zapier ---
-async function checkPaymentStatus() {
-  pollingAttempts++;
-  if (pollingAttempts > MAX_POLLING_ATTEMPTS) {
-    clearInterval(pollingIntervalId);
-    loader.style.display = "none";
-    alert("Still confirming. Check email or contact support.");
-    return;
-  }
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/payment-status`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tx_ref: currentTxRef, name: customerFullname, email: customerEmail })
-    });
-    const data = await res.json();
-
-    if (data.status === "success") {
-      clearInterval(pollingIntervalId);
-      loader.style.display = "none";
-      purchaseSuccessModal.style.display = "flex";
-      setTimeout(() => location.reload(), 5000);
-    }
-  } catch (err) {
-    console.error("verify error", err);
-  }
-}
-</script>
     <!-- Vercel Insights/Speed Insights scripts (if you want to include them) -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
