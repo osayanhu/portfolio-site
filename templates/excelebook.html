@@ -16,271 +16,46 @@
      crossorigin="anonymous"></script>
 
     <!-- Styles specific to this ebook landing page AND the new modal -->
-    <style>
-        .ebook-landing-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 3em 80px;
-            color: #ebebeb;
-            text-align: center;
-        }
-
-        .ebook-image-wrapper {
-            width: 100%;
-            max-width: 350px;
-            height: auto;
-            margin-bottom: 2em;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid #ff0077;
-            box-shadow: 0 0 20px rgba(255, 0, 119, 0.5);
-            background: transparent;
-        }
-
-        .ebook-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            background: transparent;
-        }
-
-        .ebook-content {
-            max-width: 700px;
-            margin-top: 2em;
-            padding: 1.5em 2em; /* Reduced padding for more compact content */
-            border-radius: 12px;
-            background-color: rgba(26, 26, 26, 0.8); /* Slightly lighter dark background for content block */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            text-align: center; /* Ensure main content text is centered */
-            border: 1px solid rgba(255, 0, 119, 0.2); /* Subtle border matching accent */
-        }
-
-        .ebook-content h1 {
-            font-size: 2.8em; /* Impactful heading */
-            color: #ff0077;
-            margin-bottom: 0.8em;
-            line-height: 1.2;
-            background: transparent;
-        }
-
-        .ebook-content p {
-            font-size: 1.1em;
-            color: #ebebeb;
-            line-height: 1.6;
-            margin-bottom: 1.5em; /* Standard paragraph spacing */
-            opacity: 0.8;
-            background: transparent;
-        }
-
-        /* Call to Action Button */
-        .ebook-btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 300px; /* Slightly wider button for prominence */
-            height: 65px; /* Taller button for prominence */
-            background: linear-gradient(45deg, #ff0077, #e00066); /* Gradient for pop */
-            border: 2px solid #ff0077;
-            border-radius: 8px;
-            font-size: 22px; /* Larger font */
-            color: #ffffff;
-            text-decoration: none;
-            letter-spacing: 1px;
-            font-weight: 700;
-            z-index: 1;
-            overflow: hidden;
-            transition: all 0.5s ease;
-            margin: 2em auto 1em; /* Center button and provide spacing */
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 0, 119, 0.4); /* Stronger shadow */
-            position: relative;
-        }
-
-        .ebook-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            background: linear-gradient(45deg, #e00066, #ff0077);
-            box-shadow: 0 8px 30px rgba(255, 0, 119, 0.6);
-            color: #fff;
-        }
-
-        .ebook-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.15);
-            transition: all 0.5s ease;
-            transform: skewX(-20deg);
-            z-index: -1;
-        }
-
-        .ebook-btn:hover::before {
-            left: 100%;
-        }
-
-        .secure-payment-text {
-            color: #ebebeb;
-            opacity: 0.6;
-            font-size: 0.9em;
-            margin-top: 1em;
-            background: transparent;
-        }
-
-        @media(max-width:952px){.ebook-landing-container{padding:3em}.ebook-content h1{font-size:2em}.ebook-btn{width:250px;height:55px;font-size:18px}}
-        @media(max-width:858px){.ebook-landing-container{padding:2em}.ebook-image-wrapper{max-width:280px}.ebook-content h1{font-size:1.7em}.ebook-btn{width:220px;height:50px;font-size:16px}}
-        @media(max-width:480px){.ebook-image-wrapper{max-width:180px;margin-top:2em}.ebook-btn{width:90%;height:48px;font-size:15px}}
-
-
-        /* --- Modal Styles --- */
-        .modal-overlay {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            backdrop-filter: blur(5px); /* Subtle blur effect */
-        }
-
-        .modal-content {
-            background-color: #1a1a1a; /* Dark background matching your theme */
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #ff0077; /* Accent border */
-            border-radius: 12px;
-            width: 90%; /* Responsive width */
-            max-width: 500px; /* Max width for larger screens */
-            position: relative;
-            box-shadow: 0 8px 30px rgba(255, 0, 119, 0.4); /* Glowing shadow */
-            animation: fadeInModal 0.3s ease-out; /* Fade in animation */
-            text-align: left; /* Align form content */
-        }
-
-        @keyframes fadeInModal {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-close {
-            color: #aaa;
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            background: transparent;
-        }
-
-        .modal-close:hover,
-        .modal-close:focus {
-            color: #ff0077;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-content h2 {
-            text-align: center;
-            color: #ff0077;
-            font-size: 2em;
-            margin-bottom: 1.5em;
-            background: transparent;
-        }
-
-        /* Payment Form Styles (inside modal) - Reused from previous step, but for modal inputs */
-        .payment-form {
-            width: 100%;
-            margin: 0 auto; /* Center form content inside modal */
-            background: transparent;
-        }
-
-        .form-group {
-            margin-bottom: 1.5em;
-            background: transparent;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5em;
-            color: #ebebeb;
-            font-size: 0.95em;
-            background: transparent;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"] {
-            width: calc(100% - 20px); /* Account for padding */
-            padding: 12px; /* Slightly more padding for better touch input */
-            border: 1px solid #ff0077;
-            border-radius: 5px;
-            background-color: #0d0d0d; /* Even darker input background */
-            color: #ebebeb;
-            font-size: 1em;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-group input[type="text"]:focus,
-        .form-group input[type="email"]:focus,
-        .form-group input[type="tel"]:focus {
-            border-color: #e00066;
-            box-shadow: 0 0 8px rgba(255, 0, 119, 0.5); /* Subtle glowing effect on focus */
-        }
-        /* Style for the button inside the modal's form */
-        .payment-form .ebook-btn {
-            margin-top: 2.5em; /* Add space above the button in modal */
-            width: 100%; /* Full width in modal */
-        }
-
-        /* Loader Styles */
-        .loader-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1001; /* Higher than modal */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            flex-direction: column; /* To stack spinner and text */
-            color: #ff0077;
-            font-size: 1.2em;
-        }
-
-        .spinner {
-            border: 6px solid rgba(255, 255, 255, 0.3); /* Light border */
-            border-top: 6px solid #ff0077; /* Colored border for animation */
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
+      <style>
+        .ebook-landing-container{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:3em 80px;color:#ebebeb;text-align:center}
+        .ebook-image-wrapper{width:100%;max-width:350px;height:auto;margin-bottom:2em;border-radius:8px;overflow:hidden;border:2px solid #ff0077;box-shadow:0 0 20px rgba(255,0,119,.5);background:transparent}
+        .ebook-image{width:100%;height:auto;display:block;background:transparent}
+        .ebook-content{max-width:700px;margin-top:2em;padding:1.5em 2em;border-radius:12px;background-color:rgba(26,26,26,.8);box-shadow:0 4px 15px rgba(0,0,0,.4);text-align:center;border:1px solid rgba(255,0,119,.2)}
+        .ebook-content h1{font-size:2.4em;color:#ff0077;margin-bottom:.8em;line-height:1.2;background:transparent}
+        .ebook-content p{font-size:1.05em;color:#ebebeb;line-height:1.6;margin-bottom:1.2em;opacity:.9;background:transparent}
         .ebook-bullets{margin:0 auto 1em auto;max-width:560px;text-align:left;opacity:.9}
         .ebook-bullets li{margin:.4em 0}
 
         .ebook-note{font-size:.95em;opacity:.85;margin-top:.6em}
+
+        .ebook-btn{display:inline-flex;justify-content:center;align-items:center;width:300px;height:65px;background:linear-gradient(45deg,#ff0077,#e00066);border:2px solid #ff0077;border-radius:8px;font-size:20px;color:#fff;text-decoration:none;letter-spacing:.5px;font-weight:700;z-index:1;overflow:hidden;transition:all .5s ease;margin:1.6em auto 0;cursor:pointer;box-shadow:0 5px 20px rgba(255,0,119,.4);position:relative}
+        .ebook-btn:hover{transform:translateY(-3px) scale(1.02);background:linear-gradient(45deg,#e00066,#ff0077);box-shadow:0 8px 30px rgba(255,0,119,.6)}
+        .ebook-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:rgba(255,255,255,.15);transition:all .5s ease;transform:skewX(-20deg);z-index:-1}
+        .ebook-btn:hover::before{left:100%}
+
+        /* Responsive tweaks */
+        @media(max-width:952px){.ebook-landing-container{padding:3em}.ebook-content h1{font-size:2em}.ebook-btn{width:250px;height:55px;font-size:18px}}
+        @media(max-width:858px){.ebook-landing-container{padding:2em}.ebook-image-wrapper{max-width:280px}.ebook-content h1{font-size:1.7em}.ebook-btn{width:220px;height:50px;font-size:16px}}
+        @media(max-width:480px){.ebook-image-wrapper{max-width:180px;margin-top:2em}.ebook-btn{width:90%;height:48px;font-size:15px}}
+
+        /* Modal */
+        .modal-overlay{display:none;position:fixed;z-index:1000;inset:0;width:100%;height:100%;overflow:auto;background:rgba(0,0,0,.8);justify-content:center;align-items:center;backdrop-filter:blur(5px)}
+        .modal-content{background:#1a1a1a;margin:auto;padding:30px;border:1px solid #ff0077;border-radius:12px;width:90%;max-width:500px;position:relative;box-shadow:0 8px 30px rgba(255,0,119,.4);animation:fadeInModal .3s ease-out;text-align:left}
+        @keyframes fadeInModal{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+        .modal-close{color:#aaa;position:absolute;top:15px;right:25px;font-size:28px;font-weight:bold;cursor:pointer;transition:.3s;background:transparent}
+        .modal-close:hover{color:#ff0077}
+        .modal-content h2{text-align:center;color:#ff0077;font-size:1.7em;margin-bottom:1.2em;background:transparent}
+        .payment-form{width:100%;margin:0 auto;background:transparent}
+        .form-group{margin-bottom:1.1em;background:transparent}
+        .form-group label{display:block;margin-bottom:.5em;color:#ebebeb;font-size:.95em;background:transparent}
+        .form-group input[type="text"], .form-group input[type="email"]{width:calc(100% - 20px);padding:12px;border:1px solid #ff0077;border-radius:5px;background:#0d0d0d;color:#ebebeb;font-size:1em;outline:none;transition:border-color .3s ease, box-shadow .3s ease}
+        .form-group input[type="text"]:focus, .form-group input[type="email"]:focus{border-color:#e00066;box-shadow:0 0 8px rgba(255,0,119,.5)}
+        .payment-form .ebook-btn{margin-top:1.2em;width:100%}
+
+        /* Loader */
+        .loader-overlay{display:none;position:fixed;z-index:1001;inset:0;width:100%;height:100%;background:rgba(0,0,0,.8);justify-content:center;align-items:center;backdrop-filter:blur(5px);flex-direction:column;color:#ff0077;font-size:1.05em}
+        .spinner{border:6px solid rgba(255,255,255,.25);border-top:6px solid #ff0077;border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite;margin-bottom:15px}
+        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
     </style>
 </head>
 <body>
@@ -308,7 +83,7 @@
     <div class="ebook-content">
         <h1>Excel Functions Made Easy — Free eBook</h1>
         <p>
-            Learn the <strong>50+ most useful Excel functions</p>, see <strong>real-world examples</strong>, and start saving hours on spreadsheets.
+            Learn the <strong>50+ most useful Excel functions</strong>, see <strong>real-world examples</strong>, and start saving hours on spreadsheets.
         </p>
         <ul class="ebook-bullets">
             <li>✅ <strong>Free</strong> — no payment required.</li>
