@@ -172,7 +172,10 @@
 <!-- Ionicons -->
 <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
-
+<script>
+    window.CPAlead_PublisherUserId = 3285829;
+</script>
+<script src="https://cdnflair.com/js/interact-form.js" async defer></script>
 <!-- Page logic -->
 <script>
 (function(){
@@ -182,15 +185,21 @@
     const form = document.getElementById('leadForm');
     const loader = document.getElementById('loader');
 
-    function openModal(){ modal.style.display = 'flex'; modal.setAttribute('aria-hidden','false'); }
-    function closeModal(){ modal.style.display = 'none'; modal.setAttribute('aria-hidden','true'); }
+    function openModal(){ 
+        modal.style.display = 'flex'; 
+        modal.setAttribute('aria-hidden','false'); 
+    }
+    function closeModal(){ 
+        modal.style.display = 'none'; 
+        modal.setAttribute('aria-hidden','true'); 
+    }
 
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
     modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
 
-    form.addEventListener('submit', function(e){
+    form.addEventListener('submit', async function(e){
         e.preventDefault();
         const name  = document.getElementById('customer_name').value.trim();
         const email = document.getElementById('customer_email').value.trim();
@@ -200,19 +209,40 @@
             return;
         }
 
-        // Show loader and navigate to /start so the server:
-        // - logs name + email
-        // - detects device (mobile/desktop)
-        // - redirects to the correct CPA offer with sub_id=email
-        loader.style.display = 'flex';
+        loader.style.display = 'flex'; // Show loader animation
 
-        // Pass both name and email so you can log them server-side
-        const qs = new URLSearchParams({ name, email }).toString();
-        // The backend should 302 to CPAlead from here:
-        window.location.href = `/start?${qs}`;
+        try {
+            // Call backend to register user and get sub_id
+            const qs = new URLSearchParams({ name, email }).toString();
+            const response = await fetch(`/start?${qs}`);
+            const data = await response.json();
+
+            if(data.sub_id){
+                // Trigger CPAlead locker
+                let checkCPAlead = setInterval(function() {
+                    if (typeof CPAlead !== "undefined" && CPAlead.Interact) {
+                        window.CPAlead_Options = {
+                            tool_id: 58521,
+                            subid: data.sub_id
+                        };
+                        CPAlead.Interact();
+                        clearInterval(checkCPAlead);
+                        loader.style.display = 'none';
+                        closeModal();
+                    }
+                }, 200);
+            } else {
+                loader.style.display = 'none';
+                alert("Could not start offer. Please try again.");
+            }
+        } catch (err) {
+            loader.style.display = 'none';
+            alert("Error starting offer: " + err.message);
+        }
     });
 })();
 </script>
+
 
 <!-- Vercel Insights (optional) -->
 <script>

@@ -294,7 +294,7 @@ def start_offer():
         "status": "started"
     }).execute()
 
-    return render_template("offer_overlay.html", sub_id=sub_id)
+    return {'sub_id' : sub_id}
 
 @app.route("/postback", methods=["GET"])
 def postback():
