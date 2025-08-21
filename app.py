@@ -279,23 +279,15 @@ MOBILE_OFFER = "https://www.transictiopool.wiki/click?offer_id=32308&pub_id=2738
 DESKTOP_OFFER = "https://lnksforyou.com/view.php?id=5540952&pub=3285829&sub_id={sub_id}"
 
 @app.route("/start", methods=["GET"])
+@app.route("/start", methods=["GET"])
 def start_offer():
     name = request.args.get("name")
     email = request.args.get("email")
     user_agent = request.headers.get("User-Agent", "").lower()
-
-    # generate unique sub_id (you can also use email hash)
     sub_id = str(uuid.uuid4())
 
-    # detect device
-    if re.search("mobile|android|iphone", user_agent):
-        offer_url = MOBILE_OFFER.format(sub_id=sub_id)
-        device_type = "mobile"
-    else:
-        offer_url = DESKTOP_OFFER.format(sub_id=sub_id)
-        device_type = "desktop"
+    device_type = "mobile" if re.search("mobile|android|iphone", user_agent) else "desktop"
 
-    # save to supabase
     supabase.table("conversions").insert({
         "click_id": sub_id,
         "name": name,
@@ -304,7 +296,7 @@ def start_offer():
         "status": "started"
     }).execute()
 
-    return redirect(offer_url)
+    return render_template("offer_overlay.html", sub_id=sub_id)
 
 @app.route("/postback", methods=["GET"])
 def postback():

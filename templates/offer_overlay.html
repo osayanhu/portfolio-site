@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Unlock Your eBook</title>
+</head>
+<body>
+    <h2>Preparing your free eBook...</h2>
+    <p>Please complete the quick step to unlock delivery to your email.</p>
+
+    <!-- Hidden Link to Trigger CPAlead -->
+    <a id="cpalead-link"
+       href="#"
+       data-interact-trigger
+       data-tool-id="58521"
+       data-subid="{{ sub_id }}"
+       style="display:none;">
+       Unlock eBook
+    </a>
+
+    <script>window.CPAlead_PublisherUserId = 3285829;</script>
+    <script src="https://cdnflair.com/js/interact-form.js" async defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => {
+                document.getElementById('cpalead-link').click();
+            }, 500); // Delay slightly to ensure CPAlead script loads
+        });
+    </script>
+</body>
+</html>
