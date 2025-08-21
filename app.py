@@ -275,10 +275,8 @@ url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
-MOBILE_OFFER = "https://lnksforyou.com/view.php?id=5541795&pub=3285829"
-DESKTOP_OFFER = "https://lnksforyou.com/view.php?id=5540952&pub=3285829&sub_id={sub_id}"
 
-@app.route("/start", methods=["GET"])
+
 @app.route("/start", methods=["GET"])
 def start_offer():
     name = request.args.get("name")
